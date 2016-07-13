@@ -9,7 +9,7 @@ Go to the ```./examples``` folder to run some simple demos and examples from eac
 Tutorial (TP2) covers: kernel Princical Component Analysis (kPCA), Laplacian Eigenmaps, Isomaps.
 
 <p align="center">
-<img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/kernelPCA.png" width="300"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/2D_circle.png" width="300"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/2D_circle_proj_lap.png" width="300">
+<img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/kernelPCA.png" width="300"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/2D_circle.png" width="300"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/2D_circle_proj_lap.png" width="200">
 </p>
 
 #####  Classification
