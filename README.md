@@ -20,10 +20,10 @@ Tutorial (TP3) covers: Support Vector Machine (C-SVM,nu-SVM), Relevance Vector M
 
 
 #####  Regression
-Tutorial (TP4) covers: Support Vector Regression (C-SVR,$\nu$-SVR), Relevance Vector Regression (RVM), Bayesian Linear Regression (BLR) and Gaussian Process Regression (GPR)
+Tutorial (TP4) covers: Support Vector Regression (C-SVR,nu-SVR), Relevance Vector Regression (RVM), Bayesian Linear Regression (BLR) and Gaussian Process Regression (GPR)
 
 <p align="center">
-<img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/nonlinear_bignoise_nu001.png" width="400"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/rvr_good_kernel.png" width="400"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/gp_5_0_002.png" width="400">
+<img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/nonlinear_bignoise_nu001.png" width="200"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/rvr_good_kernel.png" width="200"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/gp_5_0_002.png" width="200">
 </p>
 
 #### 3rd Party Software
