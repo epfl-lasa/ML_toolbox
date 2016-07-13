@@ -3,8 +3,8 @@
 **ML_toolbox**: A Machine learning toolbox containing a plethora of dimensionality reduction, clustering, classification and regression algorithms, examples and tutorials accompanying the Master level course [Advanced Machine Learning](http://lasa.epfl.ch/teaching/lectures/ML_MSc_Advanced/index.php) imparted at [EPFL](https://www.epfl.ch/) by [Prof. Aude Billard](http://lasa.epfl.ch/).
 
 
-<img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/csvm_optimal_visual.png" width="48">
-<img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/ada_50_iterations_alpha.png" width="48">
+<img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/csvm_optimal_visual.png" width="480">
+<img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/ada_50_iterations_alpha.png" width="480">
 
 
 
