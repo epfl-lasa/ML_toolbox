@@ -3,7 +3,9 @@
 **ML_toolbox**: A Machine learning toolbox containing algorithms for dimensionality reduction, clustering, classification and regression along with examples and tutorials which accompany the Master level course [Advanced Machine Learning](http://lasa.epfl.ch/teaching/lectures/ML_MSc_Advanced/index.php) taught at [EPFL](https://www.epfl.ch/) by [Prof. Aude Billard](http://lasa.epfl.ch/people/member.php?SCIPER=115671).
 
 Go to the ```./examples``` folder to run some simple demos and examples from each method. More in-depth tutorials are provided in ```tutorials-spring-2016``` for testing, parameter optimization, evaluation of the following 4 specific topics.
+
 --
+
 #### Tutorials
 ##### Non-linear Dimensionality Reduction
 Tutorial (TP2) covers: kernel Princical Component Analysis (kPCA), Laplacian Eigenmaps, Isomaps.
@@ -25,14 +27,17 @@ Tutorial (TP4) covers: Support Vector Regression (C-SVR,nu-SVR), Relevance Vecto
 <p align="center">
 <img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/nonlinear_bignoise_nu001.png" width="275"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/rvr_good_kernel.png" width="275"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/gp_5_0_002.png" width="275">
 </p>
+
 --
+
 ### Examples
 #### Reinforcement Learning
 <p align="center">
-<img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/PE_multiple.gif" width="275">
+<img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/PE_multiple.gif" width="500">
 </p>
 
 --
+
 #### 3rd Party Software
 This toolbox includes 3rd party software for the implementation of a couple of algorithms, namely:
 - [Matlab Toolbox for Dimensionality Reduction](https://lvdmaaten.github.io/drtoolbox/)
