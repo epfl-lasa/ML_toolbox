@@ -33,7 +33,7 @@ Tutorial (TP4) covers: Support Vector Regression (C-SVR,nu-SVR), Relevance Vecto
 ### Examples
 #### Reinforcement Learning
 <p align="center">
-<img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/PE_multiple.gif" width="500">
+<img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/PE_multiple.gif" width="700">
 </p>
 
 --
