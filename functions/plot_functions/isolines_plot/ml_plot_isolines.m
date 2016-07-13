@@ -42,12 +42,13 @@ labels              = [];
 b_plot_data         = true;
 b_plot_colorbar     = false;
 b_plot_eigenvalues  = false;
+b_plot_surf         = false;
 
 if isfield(plot_options,'labels'),              labels              = plot_options.labels;              end
 if isfield(plot_options,'b_plot_data'),         b_plot_data         = plot_options.b_plot_data;         end
 if isfield(plot_options,'b_plot_colorbar'),     b_plot_colorbar     = plot_options.b_plot_colorbar;     end
 if isfield(plot_options,'b_plot_eigenvalues'),  b_plot_eigenvalues  = plot_options.b_plot_eigenvalues;  end
-
+if isfield(plot_options,'b_plot_surf'),         b_plot_surf         = plot_options.b_plot_surf;  end
 
 %% Extract kernel options
 
@@ -56,7 +57,7 @@ kernel      = kernel_data.kernel;
 kpar        = kernel_data.kpar;
 %invsqrtL    = kernel_data.invsqrtL;
 
-%% Get Projection maps
+%% Get Projectio5 maps
 
 nbSamples   = 50;
 % Get the limits of dim1 and dim2
@@ -86,17 +87,22 @@ handle_eig = [];
 
 num_contour = 20;
 
-handle_iso  = figure;
+handle_iso  = figure('Color',[1 1 1]);
 if num_eigs == 1
     
-    contour(Xs,Ys,reshape(proj_v{1},size(Xs)),num_contour);
+    if b_plot_surf == true
+        surfc(Xs,Ys,reshape(proj_v{1},size(Xs)));
+    else
+        contourf(Xs,Ys,reshape(proj_v{1},size(Xs)), num_contour); 
+    end
+
     
     if b_plot_data == true
         hold on;
         if isempty(labels)
-            scatter(kernel_data.xtrain(:,xtrain_dim(1)),kernel_data.xtrain(:,xtrain_dim(2)),10,'filled','MarkerFaceColor',[1 0 0],'MarkerEdgeColor',[0 0 0]);
+            scatter(kernel_data.xtrain(:,xtrain_dim(1)),kernel_data.xtrain(:,xtrain_dim(2)),20,'filled','MarkerFaceColor',[1 0 0],'MarkerEdgeColor',[0 0 0]);
         else
-           hs = scatter(kernel_data.xtrain(:,xtrain_dim(1)),kernel_data.xtrain(:,xtrain_dim(2)),10,colors(labels,:),'filled','MarkerEdgeColor',[0 0 0]);
+           hs = scatter(kernel_data.xtrain(:,xtrain_dim(1)),kernel_data.xtrain(:,xtrain_dim(2)),20,colors(labels,:),'filled','MarkerEdgeColor',[0 0 0]);
         end            
     end
     
@@ -107,7 +113,9 @@ if num_eigs == 1
     set(gca,'FontSize',14);
     xlabel('x','FontSize',14);
     ylabel('y','FontSize',14);
+    colormap hot
     colorbar;
+    axis square
     
 else
     
@@ -127,22 +135,30 @@ else
     for p=1:num_eigs
        subaxis(m,n,p,'Spacing', 0.05, 'Padding', 0, 'Margin', 0.05);
        
-       contour(Xs,Ys,reshape(proj_v{p},size(Xs)),num_contour);
+        if b_plot_surf == true
+            surfc(Xs,Ys,reshape(proj_v{p},size(Xs)));
+            
+        else
+            contourf(Xs,Ys,reshape(proj_v{p},size(Xs)), num_contour); 
+        end
+    
         if b_plot_data == true
             hold on;
             if isempty(labels)
-                scatter(kernel_data.xtrain(:,xtrain_dim(1)),kernel_data.xtrain(:,xtrain_dim(2)),10,'filled','MarkerFaceColor',[1 0 0],'MarkerEdgeColor',[0 0 0]);
+                scatter(kernel_data.xtrain(:,xtrain_dim(1)),kernel_data.xtrain(:,xtrain_dim(2)),20,'filled','MarkerFaceColor',[1 0 0],'MarkerEdgeColor',[0 0 0]);
             else
-                scatter(kernel_data.xtrain(:,xtrain_dim(1)),kernel_data.xtrain(:,xtrain_dim(2)),10,colors(labels,:),'filled','MarkerEdgeColor',[0 0 0]);
+                scatter(kernel_data.xtrain(:,xtrain_dim(1)),kernel_data.xtrain(:,xtrain_dim(2)),20,colors(labels,:),'filled','MarkerEdgeColor',[0 0 0]);
             end            
         end
+        
        eig_val = kernel_data.eigen_values(eigen_idx(p));
        eig_val = round(eig_val * 100) / 100;
 
        title(['Eigen(' num2str(eigen_idx(p)) ') Eig-val: ' num2str(eig_val) ],'FontSize',8);
        xlabel('x','FontSize',8);
        ylabel('y','FontSize',8); 
-       set(gca,'FontSize',8);
+       set(gca,'FontSize',8);       
+       colormap hot
        if b_plot_colorbar == true, colorbar; end
        axis square;
 

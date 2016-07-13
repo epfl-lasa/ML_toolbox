@@ -35,7 +35,7 @@ optionts = [];
 options.method_name       = 'KPCA';  
 options.nbDimensions      = 20;      % these are the number of eigenvectors to keep.
 options.kernel            = 'gauss'; % the type of Kernel to use.
-options.kpar              = 0.4;     % this is the variance of the Gaussian function
+options.kpar              = 0.25;     % this is the variance of the Gaussian function
 
 [proj_X, mapping]         = ml_projection(X,options);
 
@@ -66,6 +66,7 @@ iso_plot_options.eigen_idx          = [1];            % Eigenvectors to use.
 iso_plot_options.b_plot_data        = true;           % If you want to plot the training data on top of the isolines 
 iso_plot_options.labels             = labels;         % If you set this field the plotted data will be colored according to class label
 iso_plot_options.b_plot_colorbar    = false;          % If you want to plot the colorbar or not.
+iso_plot_options.b_plot_surf        = false;          % If you want to plot the isolines as a surface or not
 iso_plot_options.b_plot_eigenvalues = true;
 
 kernel_data                         = [];
@@ -75,8 +76,8 @@ kernel_data.kpar                    = [mapping.param1,mapping.param2];
 kernel_data.xtrain                  = mapping.X;
 kernel_data.eigen_values            = sqrt(mapping.L);
 
-if exist('h_isoline','var') && isvalid(h_isoline), delete(h_isoline);end
-if exist('h_eig','var')     && isvalid(h_eig),     delete(h_eig);    end
+% if exist('h_isoline','var') && isvalid(h_isoline), delete(h_isoline);end
+% if exist('h_eig','var')     && isvalid(h_eig),     delete(h_eig);    end
 [h_isoline,h_eig] = ml_plot_isolines(iso_plot_options,kernel_data);
 
 %
