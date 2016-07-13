@@ -4,21 +4,22 @@
 
 Go to the ```./examples``` folder to run some simple demos and examples from each methods. More in-depth tutorials are provided in ```tutorials-spring-2016``` for the following 4 specific topics.
 
-#### Non-linear Dimensionality Reduction
+#### Tutorials
+##### Non-linear Dimensionality Reduction
 Tutorial (TP2) covers: kernel Princical Component Analysis (kPCA), Laplacian Eigenmaps, Isomaps.
 
 <p align="center">
 <img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/kernelPCA.png" width="400">
 </p>
 
-#### Classification
+#####  Classification
 Tutorial (TP3) covers: Support Vector Machine (C-SVM,\nu-SVM), Relevance Vector Machine (RVM) and Adaboost
 <p align="center">
 <img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/csvm_optimal_visual.png" width="300"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/ada_50_iterations_alpha.png" width="400">
 </p>
 
 
-#### Regression
+#####  Regression
 Tutorial (TP4) covers: Support Vector Regression (C-SVR,$\nu$-SVR), Relevance Vector Regression (RVM), Bayesian Linear Regression (BLR) and Gaussian Process Regression (GPR)
 
 <p align="center">
