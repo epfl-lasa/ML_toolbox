@@ -32,7 +32,7 @@ Tutorial (TP4) covers: Support Vector Regression (C-SVR,nu-SVR), Relevance Vecto
 
 ### Examples
 #### Reinforcement Learning
-Policy Evaluation and Value Iteration in 2D grid world, Moutain car example with Temporal Difference Learning
+Policy Evaluation (PE) and Value Iteration (VI) in 2D grid world, Moutain car example with Temporal Difference (TD) Learning
 <p align="center">
 <img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/PE_multiple.gif" width="700">
 </p>
