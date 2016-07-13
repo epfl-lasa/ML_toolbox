@@ -50,4 +50,5 @@ You DO NOT need to install these, they are already pre-packaged in this toolbox.
 The authors of this toolbox and accompanying tutorials were the TA's from Spring 2016 semester:  
 [Guillaume de Chambrier](http://lasa.epfl.ch/people/member.php?SCIPER=213946), [Nadia Figueroa](http://lasa.epfl.ch/people/member.php?SCIPER=238387) and [Denys Lamotte](http://lasa.epfl.ch/people/member.php?SCIPER=231543)
 
-If you encounter some bugs or issues with the toolbox email Nadia Figueroa (nadia.figueroafernandez AT epfl dot ch)
+##### Issues
+Maintainer: Nadia Figueroa (nadia.figueroafernandez AT epfl dot ch)
