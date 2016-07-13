@@ -15,7 +15,7 @@ Tutorial (TP2) covers: kernel Princical Component Analysis (kPCA), Laplacian Eig
 #####  Classification
 Tutorial (TP3) covers: Support Vector Machine (C-SVM,nu-SVM), Relevance Vector Machine (RVM) and Adaboost
 <p align="center">
-<img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/csvm_optimal_visual.png" width="250"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/ada_50_iterations_alpha.png" width="325">
+<img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/csvm_optimal_visual.png" width="250"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/ada_50_iterations_alpha.png" width="340">
 </p>
 
 
