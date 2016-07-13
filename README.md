@@ -26,6 +26,8 @@ Tutorial (TP4) covers: Support Vector Regression (C-SVR,nu-SVR), Relevance Vecto
 <img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/nonlinear_bignoise_nu001.png" width="275"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/rvr_good_kernel.png" width="275"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/gp_5_0_002.png" width="275">
 </p>
 
+--
+
 #### 3rd Party Software
 This toolbox includes 3rd party software for the implementation of a couple of algorithms, namely:
 - [Matlab Toolbox for Dimensionality Reduction](https://lvdmaaten.github.io/drtoolbox/)
