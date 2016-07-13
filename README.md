@@ -2,7 +2,7 @@
 
 **ML_toolbox**: A Machine learning toolbox containing a plethora of dimensionality reduction, clustering, classification and regression algorithms, examples and tutorials accompanying the Master level course [Advanced Machine Learning](http://lasa.epfl.ch/teaching/lectures/ML_MSc_Advanced/index.php) imparted at [EPFL](https://www.epfl.ch/) by [Prof. Aude Billard](http://lasa.epfl.ch/).
 
-Go to the ```./examples``` folder to run some simple demos and examples from each methods. More in-depth tutorials are provided in ```tutorials-spring-2016``` for the following 4 specific topics.
+Go to the ```./examples``` folder to run some simple demos and examples from each method. More in-depth tutorials are provided in ```tutorials-spring-2016``` for the following 4 specific topics.
 
 #### Tutorials
 ##### Non-linear Dimensionality Reduction
