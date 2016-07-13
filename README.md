@@ -15,14 +15,14 @@ Tutorial (TP2) covers: kernel Princical Component Analysis (kPCA), Laplacian Eig
 </p>
 
 #####  Classification
-Tutorial (TP3) covers: Support Vector Machine (C-SVM,nu-SVM), Relevance Vector Machine (RVM) and Adaboost
+Tutorial (TP3) covers: Support Vector Machine (C-SVM, nu-SVM), Relevance Vector Machine (RVM) and Adaboost
 <p align="center">
 <img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/nusvm.png" width="250"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/csvm_optimal_visual.png" width="250"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/ada_50_iterations_alpha.png" width="300">
 </p>
 
 
 #####  Regression
-Tutorial (TP4) covers: Support Vector Regression (C-SVR,nu-SVR), Relevance Vector Regression (RVM), Bayesian Linear Regression (BLR) and Gaussian Process Regression (GPR)
+Tutorial (TP4) covers: Support Vector Regression (eps-SVR, nu-SVR), Relevance Vector Regression (RVM), Bayesian Linear Regression (BLR) and Gaussian Process Regression (GPR)
 
 <p align="center">
 <img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/nonlinear_bignoise_nu001.png" width="275"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/rvr_good_kernel.png" width="275"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/gp_5_0_002.png" width="275">
