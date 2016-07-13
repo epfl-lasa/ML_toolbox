@@ -44,6 +44,7 @@ This toolbox includes 3rd party software for the implementation of a couple of a
 - [Matlab Toolbox for Dimensionality Reduction](https://lvdmaaten.github.io/drtoolbox/)
 - [LibSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/)
 - [SparseBayes Software](http://www.miketipping.com/downloads.htm)
+You DO NOT need to install these, they are already pre-packaged in this toolbox.
 
 --
 The authors of this toolbox and accompanying tutorials were the TA's from Spring 2016 semester:  
