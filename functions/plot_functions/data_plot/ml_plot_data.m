@@ -85,53 +85,67 @@ end
 set(gca,'FontSize',14);
 hold on;
 
-if D == 1
-    plot(X,'o');    
-    xlabel('x');
-    if ~isempty(colors)
-        scatter(X,zeros(1,length(X)),points_size,colors(labels,:));
-    else
-        scatter(X,zeros(1,length(X)),points_size);
-    end
-elseif D == 2
+if (is_eig)
+    
     if ~isempty(labels)
-        id_labels = unique(labels);
-        for i=1:size(colors,1)  
-            idx   = labels == id_labels(i);
-            scatter(X(idx,1),X(idx,2),points_size(idx),'filled','MarkerFaceColor',colors(i,:),'MarkerEdgeColor', [0 0 0]);   
-        end
-    elseif ~isempty(colors)
-            scatter(X(:,1),X(:,2),points_size,colors,'filled'); 
+        gplotmatrix(X,[],labels,colors,'.',10);
+        h = findobj('Tag','legend');
+        set(h, 'String',class_names);
     else
+        gplotmatrix(X,[],ones(size(X,1),1));
+    end
+    box on; grid on;
+    
+else    
+    
+    if D == 1
+        plot(X,'o');
+        xlabel('x');
+        if ~isempty(colors)
+            scatter(X,zeros(1,length(X)),points_size,colors(labels,:));
+        else
+            scatter(X,zeros(1,length(X)),points_size);
+        end
+    elseif D == 2
+        if ~isempty(labels)
+            id_labels = unique(labels);
+            for i=1:size(colors,1)
+                idx   = labels == id_labels(i);
+                scatter(X(idx,1),X(idx,2),points_size(idx),'filled','MarkerFaceColor',colors(i,:),'MarkerEdgeColor', [0 0 0]);
+            end
+        elseif ~isempty(colors)
+            scatter(X(:,1),X(:,2),points_size,colors,'filled');
+        else
             scatter(X(:,1),X(:,2),points_size,'filled');
-    end
-   
-elseif D == 3
-    
-    if ~isempty(colors)
-        id_labels = unique(labels);
-        for i=1:size(colors,1)  
-            idx   = labels == id_labels(i);
-            scatter3(X(idx,1),X(idx,2),X(idx,3),points_size(idx),'filled','MarkerFaceColor',colors(i,:),'MarkerEdgeColor', [0 0 0]);   
         end
-    else
+        
+    elseif D == 3
+        
+        if ~isempty(colors)
+            id_labels = unique(labels);
+            for i=1:size(colors,1)
+                idx   = labels == id_labels(i);
+                scatter3(X(idx,1),X(idx,2),X(idx,3),points_size(idx),'filled','MarkerFaceColor',colors(i,:),'MarkerEdgeColor', [0 0 0]);
+            end
+        else
             scatter3(X(:,1),X(:,2),X(:,3),points_size,'filled');
-    end
-    
-else
-    if ~isempty(labels)
-           gplotmatrix(X,[],labels,colors,'.',10);
-           h = findobj('Tag','legend');
-           set(h, 'String',class_names);
+        end
+        
     else
+        if ~isempty(labels)
+            gplotmatrix(X,[],labels,colors,'.',12);
+            h = findobj('Tag','legend');
+            set(h, 'String',class_names);
+        else
             gplotmatrix(X,[],ones(size(X,1),1));
-    end
-  
-end
-   
-if ~isempty(class_names) && D < 4
+        end        
+    end    
+end   
+
+if ~isempty(class_names) && D < 4 && is_eig == false
    legend(class_names{:}); 
 end
+
 hold off;
 box on; grid on;
 %% Set title 
@@ -144,7 +158,8 @@ if is_eig == true && D <= 3
             xlabel('eig1','FontSize',label_font_size);
         end
         if D >= 2
-            ylabel('eig2','FontSize',label_font_size);
+            xlabel('eig2','FontSize',label_font_size);
+            ylabel('eig1','FontSize',label_font_size);
         end
         if D == 3
             zlabel('eig3','FontSize',label_font_size);
