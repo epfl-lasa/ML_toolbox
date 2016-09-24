@@ -26,14 +26,15 @@ if N >=64
 else
     nbImages = (floor(sqrt(N)));
 end
+
 for j = 1:nbImages^2
-    subaxis(nbImages,nbImages,j,'Spacing', 0.05, 'Padding', 0, 'Margin', 0.05);
-    pcolor(Xs,Ys,reshape(X(j,:),size(Xs)));
+    subaxis(nbImages,nbImages,j,'Spacing', 0.01, 'Padding', 0, 'Margin', 0.05);
+%     pcolor(Xs,Ys,reshape(X(j,:),size(Xs)));
+    imagesc(reshape(X(j,:),dims));
     shading interp;
     colormap('gray');
     axis off;
 end
-
 
 
 end
