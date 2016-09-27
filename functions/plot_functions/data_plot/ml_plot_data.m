@@ -36,6 +36,7 @@ is_eig              = false;
 label_font_size     = 14;
 points_size         = 50;
 weights             = [];
+plot_labels         = [];
 plot_figure         = true; % if true a new figure will not be created.
 
 if exist('options','var')
@@ -47,6 +48,7 @@ if exist('options','var')
    if isfield(options,'weights'),       weights     = options.weights;      end
    if isfield(options,'colors'),         colors     = options.colors;       end
    if isfield(options,'plot_figure'),   plot_figure   = options.plot_figure;  end
+   if isfield(options,'plot_labels'),   plot_labels   = options.plot_labels;  end
 end
 
 if ~isempty(labels)
@@ -154,25 +156,32 @@ if plot_figure==true, title(title_name,'FontSize',16); end
 
 %% Set the labels
 if is_eig == true && D <= 3
-        if D >= 1
+        if D < 2
             xlabel('eig1','FontSize',label_font_size);
         end
-        if D >= 2
+        if D < 3
             xlabel('eig2','FontSize',label_font_size);
             ylabel('eig1','FontSize',label_font_size);
         end
         if D == 3
-            zlabel('eig3','FontSize',label_font_size);
+%             zlabel('eig3','FontSize',label_font_size);
         end
 elseif D <= 3
-        if D >= 1
-            xlabel('x','FontSize',label_font_size);
-        end
-        if D >= 2
-            ylabel('y','FontSize',label_font_size);
-        end
-        if D == 3
-            zlabel('z','FontSize',label_font_size);
+    
+        if isempty(plot_labels)
+            if D >= 1
+                xlabel('x','FontSize',label_font_size);
+            end
+            if D >= 2
+                ylabel('y','FontSize',label_font_size);
+            end
+            if D == 3
+                zlabel('z','FontSize',label_font_size);
+            end
+        else
+            xlabel(plot_labels{1},'FontSize',label_font_size);
+            ylabel(plot_labels{2},'FontSize',label_font_size);
+            zlabel(plot_labels{3},'FontSize',label_font_size);
         end
 end
 
