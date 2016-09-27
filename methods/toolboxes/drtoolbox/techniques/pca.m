@@ -34,7 +34,7 @@ function [mappedX, mapping] = pca(X, no_dims)
     if size(X, 2) < size(X, 1)
         C = cov(X);
     else
-        C = (1 / size(X, 1)) * (X * X');        % if N>D, we better use this matrix for the eigendecomposition
+      C = (1 / size(X, 1)) * (X * X');        % if N>D, we better use this matrix for the eigendecomposition
     end
 	
 	% Perform eigendecomposition of C

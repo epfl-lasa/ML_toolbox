@@ -41,7 +41,7 @@ nbDimensions        = options.nbDimensions;
 
 switch options.method_name
     
-    case {'PCA', 'MDS'}
+    case {'PCA', 'MDS'}     
         [projectedData, mapping] = compute_mapping(X, options.method_name, nbDimensions);
         
     case 'KPCA'
