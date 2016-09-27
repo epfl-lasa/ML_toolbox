@@ -182,9 +182,13 @@ elseif D <= 3
             xlabel(plot_labels{1},'FontSize',label_font_size);
             ylabel(plot_labels{2},'FontSize',label_font_size);
             zlabel(plot_labels{3},'FontSize',label_font_size);
-        end
+        end        
 end
 
+
+if D ==3
+    view(3)
+end
 end
 
 
