@@ -20,10 +20,12 @@ function handle = ml_plot_class_boundary(X,options)
 
 b_plot_boundary = true;
 dims            = [1,2];
+titlename       = '';
 
 if ~isfield(options,'method_name'),  error('field of method_name of structure options was not defined!'); end
 if isfield(options,'b_plot_boundary'),  b_plot_boundary = options.b_plot_boundary; end
 if isfield(options,'dims'),             dims = options.dims;                       end
+if isfield(options,'title'),            titlename = options.title;                       end
 
 %% Plot figure
 handle = figure;
@@ -95,6 +97,7 @@ switch options.method_name
         
 end
 
+title(titlename);
 
 end
 

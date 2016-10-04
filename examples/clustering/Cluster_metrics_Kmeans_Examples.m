@@ -8,6 +8,7 @@ num_classes         = 4;
 dim                 = 2;
 [X,labels,gmm]      = ml_clusters_data(num_samples,dim,num_classes);
 options.title       = '2D Mixture of Gaussians Dataset';
+options.labels      = labels;
 [N,D]               = size(X);
 
 if exist('h1','var') && isvalid(h1), delete(h1);end

@@ -19,6 +19,5 @@ D           = ml_distfunc(X, centroid, dist);
 [~, labels] = min(D, [], 2);
 
 
-
 end
 
