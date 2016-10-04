@@ -5,9 +5,9 @@ clear all; close all;
 clear all; close all;
 num_samples         = 400;
 num_classes         = 4;
-dim                 = 3;
+dim                 = 2;
 [X,labels,gmm]      = ml_clusters_data(num_samples,dim,num_classes);
-options.title       = 'Random Gaussian';
+options.title       = '2D Mixture of Gaussians Dataset';
 [N,D]               = size(X);
 
 if exist('h1','var') && isvalid(h1), delete(h1);end
@@ -20,7 +20,7 @@ nb_samples  = 100;
 phi         = linspace(0,2 * pi,nb_samples);
 r           = 10;
 X           = [r .* cos(phi(:)), r .* sin(phi(:))];   
-%% Plot circle points
+% Plot circle points
 
 plot_options                = [];
 plot_options.title          = 'Circle';
@@ -98,7 +98,7 @@ disp(['(BIC) Optimal K: ', num2str(opt_Ks_BIC)])
 
 cluster_options             = [];
 cluster_options.method_name = 'kmeans';
-cluster_options.K           = opt_Ks_AIC;
+cluster_options.K           = opt_Ks_RSS(1);
 
 result1                     = ml_clustering(X,cluster_options,'Start','plus','Distance','sqeuclidean','MaxIter',500);
 result1.lambda              = 2;

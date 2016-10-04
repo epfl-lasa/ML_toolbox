@@ -40,7 +40,7 @@ cluster_options.kpar        = 0.1;
 
 %% Plot decision boundary
 if exist('hd','var') && isvalid(hd), delete(hd);end
-hd = ml_plot_class_boundary(X,result1);
+hd = ml_plot_class_boundary(X,result);
 axis equal;
 
 %% Evaluation

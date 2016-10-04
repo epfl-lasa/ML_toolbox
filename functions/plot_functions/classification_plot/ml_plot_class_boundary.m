@@ -28,6 +28,8 @@ if isfield(options,'dims'),             dims = options.dims;                    
 %% Plot figure
 handle = figure;
 
+[N, D] = size(X);
+
 switch options.method_name
     
     case 'kmeans'
@@ -44,13 +46,20 @@ switch options.method_name
         
         pcolor(Xs,Ys,Z); shading interp;
         colormap(colors);
+        alpha(0.8)
         hold on;
-        if b_plot_boundary == true
-            scatter(X(:,1),X(:,2),10,colors(labels,:),'filled','MarkerEdgeColor',[0 0 0]);
-        end
         
+        if b_plot_boundary == true
+            scatter(X(:,1),X(:,2),50,colors(labels,:),'o','filled','MarkerEdgeColor',[0 0 0]);
+        end
         ml_plot_centroid(centroids(:,dims),colors);
         
+        if D == 2
+            xlabel('x'); ylabel('y')
+        end
+        if D == 3
+            xlabel('x'); ylabel('y'); zlabel('z');
+        end
         
     case 'kernel-kmeans'
         
