@@ -116,9 +116,9 @@ else
                 scatter(X(idx,1),X(idx,2),points_size(idx),'filled','MarkerFaceColor',colors(i,:),'MarkerEdgeColor', [0 0 0]);
             end
         elseif ~isempty(colors)
-            scatter(X(:,1),X(:,2),points_size,colors,'filled');
+            scatter(X(:,1),X(:,2),points_size,colors,'filled','MarkerEdgeColor', [0 0 0]);
         else
-            scatter(X(:,1),X(:,2),points_size,'filled');
+            scatter(X(:,1),X(:,2),points_size,'filled','MarkerEdgeColor', [0 0 0]);
         end
         
     elseif D == 3
