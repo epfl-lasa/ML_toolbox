@@ -23,7 +23,7 @@ else
 end
 
 if ~isfield(options,'distance')
-   error('no centroids parameter set'); 
+   error('no distance parameter set'); 
 else
     distance = options.distance;
 end
