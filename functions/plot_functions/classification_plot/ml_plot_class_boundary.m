@@ -39,11 +39,26 @@ switch options.method_name
         K          = options.K;
         centroids  = options.centroids;
         distance   = options.distance;
+        
+        if strcmp(distance,'L1')
+            distance    = 'cityblock';
+        elseif strcmp(distance,'L2')
+            distance    = 'sqeuclidean';
+        elseif strcmp(distance,'Linf')
+            distance    = 'Linf';
+        end
+        
         labels     = options.labels;
         colors     = hsv(K);
         [Xs,Ys]    = get_grid(X,dims,1000);
         
-        idx        = kmeans_classifier([Xs(:),Ys(:)],centroids(:,dims),distance);
+        if ~strcmp(distance,'LInf')
+            idx        = kmeans_classifier([Xs(:),Ys(:)],centroids(:,dims),distance);
+        else
+            d_i =  my_distX2Mu([Xs(:),Ys(:)]', centroids', distance);
+            [~, idx] = min(d_i, [], 1);
+        end
+        
         Z          = reshape(idx,size(Xs));
         
         pcolor(Xs,Ys,Z); shading interp;
