@@ -115,12 +115,12 @@ for k=1:K
     W       = log_gmm_div_w(X,Priors_k,Mu_k,Sigma_k);
     dPriors = log_gmm_div_prior(W,Priors);
     dMu     = log_gmm_div_mu(X,W,Mu_k,Sigma_k);
-   % dSigma  = log_gmm_div_sigma(X,W, Mu_k + dMu,Sigma_k);
+%    dSigma  = log_gmm_div_sigma(X,W, Mu_k + dMu,Sigma_k);
 
     Priors_k = Priors_k + dPriors;
     Priors_k = Priors_k./sum(Priors_k);
     Mu_k     = Mu_k + dMu;
-   % Sigma_k  = Sigma_k + 0.001 .* dSigma;
+%    Sigma_k  = Sigma_k + 0.001 .* dSigma;
        
  
     disp(['it(' num2str(k) ') loglik: ' num2str(logliks(k))]);

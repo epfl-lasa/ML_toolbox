@@ -101,7 +101,7 @@ bp = (v*d*ap) + repmat(means, 1, size(ap,2));
 %h = plot(bp(1,:), bp(2,:), '-', 'parent', axh);
 %set(h,'color',color);
 %else
-h = patchline(bp(1,:),bp(2,:),'linestyle','-','edgealpha',alphaChannel,'edgecolor',color,'LineSmoothing','on');
+h = patchline(bp(1,:),bp(2,:),'linewidth',2,'linestyle','-','edgealpha',alphaChannel,'edgecolor',color,'LineSmoothing','on');
 %end
 
 function h = show2d_noalpha(means, C, sdwidth, npts, axh,color)
