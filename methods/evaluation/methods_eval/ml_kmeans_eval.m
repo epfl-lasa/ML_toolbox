@@ -35,7 +35,7 @@ if ~exist('lambda','var'),lambda = 2; end
 rss       = 0;    
 for k=1:K   
     idx     = k==labels;
-    rss     = rss + sum(sqrt(ml_distfunc(X(idx,:), C(k,:), dist)));
+    rss     = rss + sum(sqrt(ml_distfunc(X(idx,:), C(k,:), dist)).^2);
 end
   
 aic = ml_aic(-0.5*rss,D * K,lambda);

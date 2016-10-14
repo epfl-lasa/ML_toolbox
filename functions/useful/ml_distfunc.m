@@ -17,7 +17,7 @@ function D = ml_distfunc(X, C, dist)
 D           = zeros(n,size(C,1));
 nclusts     = size(C,1);
 
-switch dist
+switch dist        
     case 'sqeuclidean'
         for i = 1:nclusts
             D(:,i) = (X(:,1) - C(i,1)).^2;
