@@ -118,7 +118,7 @@ while 1
             %Update the covariance matrices
             Dist_sqr      = sum((Data - repmat(Mu(:,i),1,nbData)).^2,1);
             Sigma(:,:,i)  = eye(nbVar,nbVar) .* ((Dist_sqr * Pix(:,i))./sum(Pix(:,i))) ./ nbVar;
-            Sigma(:,:,i) = Sigma(:,:,i) + regulisation.*diag(ones(nbVar,1));
+            Sigma(:,:,i)  = Sigma(:,:,i) + regulisation.*diag(ones(nbVar,1));
     end
     
     %% Stopping criterion %%%%%%%%%%%%%%%%%%%%
