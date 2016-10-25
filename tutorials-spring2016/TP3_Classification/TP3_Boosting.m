@@ -43,6 +43,7 @@ plot_data_options.weights = ml_scale(D,1,50);
 
 if exist('hc','var') && isvalid(hc), delete(hc);end
 hc = ml_plot_classifier(f,X,labels,c_options,plot_data_options);
+axis tight
 
 %% Plot non-signed value of strong classifier C(x)
 

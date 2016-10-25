@@ -31,9 +31,9 @@ pcolor(Xs,Ys,reshape(Zs,size(Xs))); shading interp;
 colormap('hot');
 
 %% Plot Original data X
-
-options_plot_data.no_figure = true;
-options_plot_data.labels    = labels;
+hold on;
+options_plot_data.plot_figure = true;
+options_plot_data.labels      = labels;
 
 ml_plot_data(X(:,dims),options_plot_data);
 

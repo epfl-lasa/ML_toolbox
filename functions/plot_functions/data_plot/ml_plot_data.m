@@ -67,9 +67,9 @@ end
 %% Plot the data
 
 if plot_figure == true
-    handle = figure;
-else
     handle = [];
+else
+    handle = figure;
 end
 
 if sum(labels < 1) ~= 0 % some labels are negative

@@ -14,10 +14,11 @@ function handle = ml_plot_class_boundary_2(X,f,options)
 
 dims            = [1,2];
 no_figure       = false; % if false plots a new figure
+dim_swaped      = false; %false: (MXD) , true: (DXM)
 
 if isfield(options,'dims'),             dims        = options.dims;                       end
 if isfield(options,'no_figure'),        no_figure   = options.no_figure;                  end
-
+if isfield(options,'dim_swaped'),       dim_swaped   = options.dim_swaped;                  end
 
 
 %% Plot figure
@@ -27,9 +28,16 @@ else
     handle = [];
 end
 
+[Xs,Ys]     = get_grid(X,dims,100);
 
-[Xs,Ys]     = get_grid(X,dims,1000);
-    Zs      = f([Xs(:),Ys(:)]);     
+% predicted class label
+if dim_swaped
+    Zs      = f([Xs(:),Ys(:)]');
+else
+    Zs      = f([Xs(:),Ys(:)]);
+end
+
+
 num_classes = unique(Zs);        
 
 colors      = hsv(length(num_classes));
