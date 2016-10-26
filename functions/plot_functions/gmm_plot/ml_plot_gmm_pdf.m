@@ -30,7 +30,7 @@ options.class_names = {};
 options.labels      = [];
 options.points_size = 30;
 options.colors      = [0 1 0.5];
-options.plot_figure = false;
+options.plot_figure = true;
 ml_plot_data(X',options);
 title ('GMM-PDF Contours');
 end
