@@ -9,7 +9,7 @@ y           = sin(X*0.2) + normrnd(1,epsilon,1,nbSamples);
 X           = X(:);
 y           = y(:);
 
-% Make hole in Data
+%% Make hole in Data
 
 id    = (X > 20 & X < 30);
 X(id) = [];

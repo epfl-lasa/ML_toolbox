@@ -34,7 +34,8 @@ y = y(:);
 options             = [];
 options.points_size = 15;
 options.title       = 'Example 1D Linear Training Data'; 
-ml_plot_data([X(:),y(:)],options); hold on;
+if exist('h0','var') && isvalid(h0), delete(h0);end
+h0 =ml_plot_data([X(:),y(:)],options); hold on;
 
 % Plot True function and Data
 plot(X,y_true,'--k','LineWidth',2);
@@ -60,7 +61,8 @@ options             = [];
 options.labels      = [];
 options.points_size = 15;
 options.title       = 'Example 1D Non-linear Training Data';  
-ml_plot_data([X(:),y(:)],options); hold on;
+if exist('h1','var') && isvalid(h1), delete(h1);end
+h1 = ml_plot_data([X(:),y(:)],options); hold on;
 
 % Plot True function and Data
 plot(X,y_true,'--k','LineWidth',2);
@@ -87,7 +89,8 @@ options             = [];
 options.labels      = [];
 options.points_size = 15;
 options.title       = 'Example 1D Non-linear Training Data'; 
-ml_plot_data([X(:),y(:)],options); hold on;
+if exist('h2','var') && isvalid(h2), delete(h2);end
+h2 = ml_plot_data([X(:),y(:)],options); hold on;
 
 % Plot True function and Data
 plot(X,y_true,'--k','LineWidth',2);
@@ -138,10 +141,10 @@ ml_plot_svr_function( X, y, model, svr_options);
 clear svr_options
 svr_options.svr_type    = 0;    % 0: epsilon-SVR, 1: nu-SVR
 svr_options.C           = 10;   % set the parameter C of C-SVC, epsilon-SVR, and nu-SVR 
-svr_options.epsilon     = 0.3;  % set the epsilon in loss function of epsilon-SVR 
+svr_options.epsilon     = 10;  % set the epsilon in loss function of epsilon-SVR 
 % Kernel OPTIONS
 svr_options.kernel_type = 2;    % 0: linear: u'*v, 1: polynomial: (gamma*u'*v + coef0)^degree, 2: radial basis function: exp(-gamma*|u-v|^2)
-svr_options.sigma       = 1;  %  radial basis function: exp(-gamma*|u-v|^2), gamma = 1/(2*sigma^2)
+svr_options.sigma       = 10;  %  radial basis function: exp(-gamma*|u-v|^2), gamma = 1/(2*sigma^2)
 
 
 % Train SVR Model
@@ -159,7 +162,7 @@ svr_options.C           = 10;   % set the parameter C of C-SVC, epsilon-SVR, and
 svr_options.nu          = 0.1;  % nu \in (0,1) (upper-bound for misclassifications on margni and lower-bound for # of SV) for nu-SVM
 % Kernel OPTIONS
 svr_options.kernel_type = 2;    % 0: linear: u'*v, 1: polynomial: (gamma*u'*v + coef0)^degree, 2: radial basis function: exp(-gamma*|u-v|^2)
-svr_options.sigma       = 0.50;   %  radial basis function: exp(-gamma*|u-v|^2), gamma = 1/(2*sigma^2)
+svr_options.sigma       = 5;   %  radial basis function: exp(-gamma*|u-v|^2), gamma = 1/(2*sigma^2)
 
 % Train SVR Model
 clear model

@@ -37,7 +37,7 @@ label_font_size     = 14;
 points_size         = 50;
 weights             = [];
 plot_labels         = [];
-plot_figure         = true; % if true a new figure will not be created.
+plot_figure         = false; % if true a new figure will not be created.
 
 if exist('options','var')
    if isfield(options,'labels'),        labels      = options.labels;       end
@@ -145,14 +145,16 @@ else
 end   
 
 if ~isempty(class_names) && D < 4 && is_eig == false
-   legend(class_names{:}); 
+   legend(class_names{:},'FontName','Times'); 
 end
 
 hold off;
 box on; grid on;
 %% Set title 
 
-if plot_figure==true, title(title_name,'FontSize',16); end
+if plot_figure==false, 
+    title(title_name, 'Interpreter','tex','FontName','Times', 'FontWeight','Light','Interpreter','tex'); 
+end
 
 %% Set the labels
 if is_eig == true && D <= 3
