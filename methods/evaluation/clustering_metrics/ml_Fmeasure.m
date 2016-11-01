@@ -44,6 +44,7 @@ for i = 1:nbOfClasses
     end
 end
 
+
 for m = 1:nbOfClasses
     sizeClasses(m,:) = length(find(class_labels==m));
 end

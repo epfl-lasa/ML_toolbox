@@ -153,7 +153,7 @@ box on; grid on;
 %% Set title 
 
 if plot_figure==false, 
-    title(title_name, 'Interpreter','tex','FontName','Times', 'FontWeight','Light','Interpreter','tex'); 
+    title(title_name, 'Interpreter','tex','FontName','Times', 'FontWeight','Light'); 
 end
 
 %% Set the labels
@@ -181,9 +181,9 @@ elseif D <= 3
                 zlabel('z','FontSize',label_font_size);
             end
         else
-            xlabel(plot_labels{1},'FontSize',label_font_size);
-            ylabel(plot_labels{2},'FontSize',label_font_size);
-            zlabel(plot_labels{3},'FontSize',label_font_size);
+            xlabel(plot_labels{1},'FontSize',label_font_size,'FontName','Times', 'FontWeight','Light');
+            ylabel(plot_labels{2},'FontSize',label_font_size,'FontName','Times', 'FontWeight','Light');
+            zlabel(plot_labels{3},'FontSize',label_font_size,'FontName','Times', 'FontWeight','Light');
         end        
 end
 

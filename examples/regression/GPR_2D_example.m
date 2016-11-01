@@ -31,14 +31,20 @@ y = y(:);
 
 %% Plot Training Data
 
+% Plot Real Function
 options           = [];
 options.title     = 'Training data';
-options.bFigure   = true;
-options.surf_type = 'pcolor';
-
+options.surf_type = 'surf';
 
 if exist('h1','var') && isvalid(h1), delete(h1);end
-h1 = ml_plot_value_func(X,f,[1 2],options);
+h1 = ml_plot_value_func(X,f,[1 2],options);hold on
+
+% Plot Training Data
+options.bFigure     = false;
+options.surf_type   = 'scatter';
+options.points_size = 20;
+ml_plot_value_func(X,f,[1 2],options);hold on
+
 
 %% Train GP (no real training, just give parameters)
 

@@ -22,11 +22,19 @@ num_samples = 50;
 title_name  = 'your title';
 handle      = [];
 surf_type   = 'surf';
+color       = 'k';
+points_size = 15;
+bFigure     = true;
+bColorbar   = false;
+Cmap        = 'hot'; 
 
-if isfield(options,'bFigure'),      bFigure      = options.bFigure;      end
-if isfield(options,'title'),        title_name   = options.title;    end
-if isfield(options,'surf_type'),    surf_type    = options.surf_type;    end
-
+if isfield(options,'Cmap'),         Cmap         = options.Cmap;        end
+if isfield(options,'color'),        color        = options.color;       end
+if isfield(options,'bFigure'),      bFigure      = options.bFigure;     end
+if isfield(options,'bColorbar'),    bColorbar    = options.bColorbar;   end
+if isfield(options,'points_size'),  points_size  = options.points_size; end
+if isfield(options,'title'),        title_name   = options.title;       end
+if isfield(options,'surf_type'),    surf_type    = options.surf_type;   end
 
 %% Get boundary of original data.
 
@@ -55,11 +63,11 @@ end
 
 if strcmp(surf_type,'surf')
 
-    hs = surf(X,Y,reshape(z,size(X))); shading interp;
+    hs = surf(X,Y,reshape(z,size(X)));
     
 elseif strcmp(surf_type,'scatter')
     
-    hs = scatter3(X(:),Y(:),z(:),10,z(:));
+    hs = scatter3(X(:),Y(:),z(:),points_size, color,'filled');
 
 elseif strcmp(surf_type,'pcolor')
 
@@ -67,15 +75,21 @@ elseif strcmp(surf_type,'pcolor')
    
 end
 
-colorbar;
-
+%% Plot Colorbar
+if bColorbar
+    colorbar;
+end
 %% Plot attributes, name, lables, scaling, etc...
 
 if bFigure
- 
-    title(title_name);
-    
+    title(title_name, 'Interpreter','tex','FontName','Times', 'FontWeight','Light','Interpreter','tex'); 
+    xlabel('x_1','FontName','Times', 'FontWeight','Light');
+    ylabel('x_2','FontName','Times', 'FontWeight','Light');
+    zlabel('y','FontName','Times', 'FontWeight','Light'); 
+    axis tight
 end
+
+colormap (Cmap)
 
 
 end
