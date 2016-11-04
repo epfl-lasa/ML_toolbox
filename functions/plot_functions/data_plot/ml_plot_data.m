@@ -51,7 +51,7 @@ if exist('options','var')
    if isfield(options,'plot_labels'),   plot_labels   = options.plot_labels;  end
 end
 
-if ~isempty(labels)
+if ~isempty(labels) && isempty(colors)
    colors = hsv(length(unique(labels)));
 end
 
