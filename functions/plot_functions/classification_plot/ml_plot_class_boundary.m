@@ -8,8 +8,8 @@ function handle = ml_plot_class_boundary(X,options)
 %
 %          o options : structure
 %
-%               options.method_name  = 'kmeans' : this options should be given
-%
+%               options.method_name  = 'kmeans' : for k-means clustering
+%                                      'gmm'    : for GMM clustering
 %
 %
 %
@@ -110,6 +110,54 @@ switch options.method_name
         pcolor(Xs,Ys,Z); shading interp;
         colormap(colors);
         
+    case 'gmm'
+
+        Priors = options.gmm.Priors;
+        Mu = options.gmm.Mu;
+        Sigma = options.gmm.Sigma;
+        type = options.type;
+        labels = options.labels;
+        K = length(Priors);
+        
+        [Xs,Ys] = get_grid(X,dims,1000);
+        colors  = hsv(K);
+        colors(end+1,:) = 0.5*[1;1;1];
+        
+        switch type
+            case 'hard'
+                idx = gmm_cluster([Xs(:), Ys(:)]', Priors, Mu, Sigma, type, options.softThresholds);
+                Z = reshape(idx,size(Xs));
+                pcolor(Xs,Ys,Z); shading interp;
+                colormap(colors(1:K,:));
+            case 'soft'
+                [idx] = gmm_cluster([Xs(:), Ys(:)]', Priors, Mu, Sigma, type, options.softThresholds);
+                
+                idx(find(idx==0)) = K + 1;
+                %idx_clustered = idx(find(idx~=0));
+                %idx_clustered = idx(find(idx~=0));
+                Z = reshape(idx,size(Xs));
+                pcolor(Xs,Ys,Z); shading interp;
+                
+                if(length(unique(idx)) == K)
+                    colormap(colors(1:K,:));
+                else
+                    colormap(colors(:,:));
+                end
+        end
+        
+        hold on;
+        
+        labels(find(labels==0)) = K + 1;
+        if b_plot_boundary == true
+            scatter(X(:,1),X(:,2),50,colors(labels,:),'o','filled','MarkerEdgeColor',[0 0 0]);
+        end
+        
+        ml_plot_centroid(Mu(dims,:)',colors);
+        
+        if D == 2
+            xlabel('x'); ylabel('y')
+        end 
+         
 end
 
 title(titlename);
