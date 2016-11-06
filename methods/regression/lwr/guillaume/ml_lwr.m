@@ -18,8 +18,6 @@ function [hy,model] = ml_lwr(X,y,model,lwr_options)
 %
 %
 
-
-
 if ~isempty(y)
 % Train the model    
     lwr_obj         = LWR(lwr_options);

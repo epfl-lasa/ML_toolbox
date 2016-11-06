@@ -15,7 +15,7 @@ if exist('h1','var') && isvalid(h1), delete(h1);end
 h1      = ml_plot_data([X(:),y(:)],options);
 
 %% Train LWR
- 
+
 lwr_options         = [];
 lwr_options.dim     = 1;
 lwr_options.D       = 0.1;
@@ -23,36 +23,39 @@ lwr_options.K       = 100;
 lwr                 = LWR(options);
 lwr.train(X,y);
 
-%%  Test (Prediction) & Plot test result
 
+%%  Test (Prediction) & Plot test result
 options             = [];
 options.points_size = 10;
 options.title       = 'Locally Weighted Regression';
 
 % Plot original data
 
-if exist('h2','var') && isvalid(h2), delete(h2);end
-h2      = ml_plot_data([X(:),y(:)],options);
+% if exist('h2','var') && isvalid(h2), delete(h2);end
+ml_plot_data([X(:),y(:)],options);
 
 % Plot regression function
 hold on;
-ytest2     = lwr.f(X);
-plot(X,ytest2,'-g','LineWidth',2);
+Xtest = X(1:1:end,:);
+ytest = lwr.f(Xtest);
+plot(Xtest,ytest,'-k','LineWidth',2);
 
-% Plot the value of LWR and linear function at a few chosen samples
+%% Plot the value of LWR and linear function at a few chosen samples
 
 nbSamples = 10;
 Xtest     = linspace(10,90,nbSamples)';
 ytest     = lwr.f(Xtest);
 
 hold on;
+points = 3;
 for i=1:nbSamples
 
     [ytest,W,B]     = lwr.f(Xtest(i));
     
-    xs = (Xtest(i)-3):0.1:(Xtest(i)+3);
+    xs = (Xtest(i)-points):0.1:(Xtest(i)+points);
     ys = B' * [xs;ones(1,length(xs))];
 
+%     plot(Xtest(i),ytest,'or','MarkerFaceColor',[1 0 0]);
     plot(Xtest(i),ytest,'or','MarkerFaceColor',[1 0 0]);
     plot(xs,ys,'-r','LineWidth',2);
 
@@ -73,7 +76,6 @@ train = cell(length(rbf_vars),1);
 
 lwr_options         = [];
 lwr_options.dim     = 1;
-lwr_options.D       = (10).^2;
 lwr_options.K       = 100;
 
 for i=1:length(rbf_vars)

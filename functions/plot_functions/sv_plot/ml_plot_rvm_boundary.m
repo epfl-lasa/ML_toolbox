@@ -45,6 +45,10 @@ if (size(varargin, 2) == 1) && strcmp(varargin{1}, 'draw')
     contourf(grid1,grid2, reshape(p_grid,size(grid1)), 50, 'LineStyle', 'none');
     legend_names = {'Decision values (p(x))', 'Class 1','Class 0', 'p=0.5', 'p=0.75', 'p=0.25'};
     colorbar
+elseif (size(varargin, 2) == 1) && strcmp(varargin{1}, 'surf')
+    surf(grid1,grid2, reshape(p_grid,size(grid1))); shading interp;
+    legend_names = {'Decision Values f(x)','f(x)=0', 'f(x)= +1','f(x)=-1','Class 1','Class -1'};
+    colorbar
 else    
     legend_names = {'Class 1','Class 0', 'p=0.5', 'p=0.75', 'p=0.25'};
 end

@@ -44,6 +44,10 @@ if (size(varargin, 2) == 1) && strcmp(varargin{1}, 'draw')
     contourf(X,Y, vals, 50, 'LineStyle', 'none');
     legend_names = {'Decision Values f(x)','f(x)=0', 'f(x)= +1','f(x)=-1','Class 1','Class -1'};
     colorbar
+elseif (size(varargin, 2) == 1) && strcmp(varargin{1}, 'surf')
+    surf(X,Y, vals); shading interp;
+    legend_names = {'Decision Values f(x)','f(x)=0', 'f(x)= +1','f(x)=-1','Class 1','Class -1'};
+    colorbar
 else
     legend_names = {'f(x)=0', 'f(x)= +1','f(x)=-1','Class 1','Class -1'};        
 end
