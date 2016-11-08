@@ -72,17 +72,15 @@ else
     handle = figure;
 end
 
-if sum(labels < 1) ~= 0 % some labels are negative
-    labels_tmp   = zeros(size(labels));
-    labels_class = unique(labels);
-    
-    for i=1:length(labels_class)
-        labels_tmp(labels_class(i)==labels) = i;
-    end
-    labels = labels_tmp;
-end
-
-
+% if sum(labels < 1) ~= 0 % some labels are negative
+%     labels_tmp   = zeros(size(labels));
+%     labels_class = unique(labels);
+%     
+%     for i=1:length(labels_class)
+%         labels_tmp(labels_class(i)==labels) = i;
+%     end
+%     labels = labels_tmp;
+% end
 
 set(gca,'FontSize',14);
 hold on;

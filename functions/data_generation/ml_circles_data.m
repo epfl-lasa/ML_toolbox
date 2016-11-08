@@ -26,7 +26,7 @@ labels  = [];
 
 width   = 0.5;
 spacing = 0.5;        
-noise_r = 0.05; % variance of noise for the radius
+noise_r = 0.1; % variance of noise for the radius
 
 % number of data points per class
 nb_data_class = floor(num_samples/num_classes);

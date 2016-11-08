@@ -75,8 +75,10 @@ function ydata = tsne(X, labels, no_dims, initial_dims, perplexity)
     end
     
     % Compute pairwise distance matrix
+    clear C
+    pair = X * X';
     sum_X = sum(X .^ 2, 2);
-    D = bsxfun(@plus, sum_X, bsxfun(@plus, sum_X', -2 * (X * X')));
+    D = bsxfun(@plus, sum_X, bsxfun(@plus, sum_X', -2 * (pair)));
     
     % Compute joint probabilities
     P = d2p(D, perplexity, 1e-5);                                           % compute affinities using fixed perplexity
