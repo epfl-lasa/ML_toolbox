@@ -87,7 +87,7 @@ labels = [];
 %     
 % end
     
-[X,labels]  = gmm_sample(nb_data_class,Priors,Mu,Sigma);
+[X,labels]  = ml_gmm_sample(nb_data_class,Priors,Mu,Sigma);
 X           = X'; 
 labels      = labels(:);
 

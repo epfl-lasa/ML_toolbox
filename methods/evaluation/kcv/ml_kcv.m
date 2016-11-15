@@ -106,6 +106,8 @@ for k=1:K
     test         = bins{k};
     train        = cell2mat(bins(train_idx));
     
+    disp(['train pts ' num2str(length(train)) '/ test pts ' num2str(length(test))]);
+    
     % Train the classifier
     [~,model]    = f(X(train(:),:),labels(train(:)),[]);
     

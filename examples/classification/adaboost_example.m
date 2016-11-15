@@ -20,7 +20,7 @@
   axis equal;
 %% Use Adaboost to make a classifier
   
-[classestimate,model]=adaboost('train',datafeatures,dataclass,200);
+[classestimate,model]=adaboost('train',datafeatures,dataclass,[],200);
 
 %%
 

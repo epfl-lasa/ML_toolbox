@@ -51,8 +51,8 @@ ml_plot_class_boundary_2(X,f,options);
 ml_plot_data(X,plot_data_options);
 
 %% Plot Misclassified points (with cross)
-if show_misclass
-    misclassified = ml_get_misclassified(X,labels,f);
+if show_misclass   
+    misclassified = ml_get_misclassified(X,labels,f,[]);
     idx           = misclassified.idx;
 
     hold on;

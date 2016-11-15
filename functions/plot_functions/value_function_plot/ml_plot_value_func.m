@@ -22,6 +22,7 @@ num_samples = 50;
 title_name  = 'your title';
 handle      = [];
 surf_type   = 'surf';
+regr_type   = 'LR';
 color       = 'k';
 points_size = 15;
 bFigure     = true;
@@ -35,10 +36,15 @@ if isfield(options,'bColorbar'),    bColorbar    = options.bColorbar;   end
 if isfield(options,'points_size'),  points_size  = options.points_size; end
 if isfield(options,'title'),        title_name   = options.title;       end
 if isfield(options,'surf_type'),    surf_type    = options.surf_type;   end
+if isfield(options,'regr_type'),    regr_type    = options.regr_type;   end
 
 %% Get boundary of original data.
 
+size(X)
+
 X = X(:,dims);
+
+size(X)
 
 min_x = min(X(:,1));
 max_x = max(X(:,1));
@@ -48,10 +54,20 @@ max_y = max(X(:,2));
 
 [X,Y]  = meshgrid(linspace(min_x,max_x,num_samples),linspace(min_y,max_y,num_samples));
 
+size(X)
+size(Y)
 
 %% Evaluate f
 
-z      = f([X(:),Y(:)]);
+switch regr_type
+    case 'LR';
+        Data = [X(:),Y(:)];        
+    case 'GMR'    
+        Data = [X(:),Y(:)]';        
+end
+
+z      = f(Data);
+
 
 %% Plot
 
