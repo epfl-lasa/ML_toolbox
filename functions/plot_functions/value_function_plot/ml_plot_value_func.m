@@ -40,11 +40,9 @@ if isfield(options,'regr_type'),    regr_type    = options.regr_type;   end
 
 %% Get boundary of original data.
 
-size(X)
+
 
 X = X(:,dims);
-
-size(X)
 
 min_x = min(X(:,1));
 max_x = max(X(:,1));
@@ -53,9 +51,6 @@ min_y = min(X(:,2));
 max_y = max(X(:,2));
 
 [X,Y]  = meshgrid(linspace(min_x,max_x,num_samples),linspace(min_y,max_y,num_samples));
-
-size(X)
-size(Y)
 
 %% Evaluate f
 
@@ -66,8 +61,11 @@ switch regr_type
         Data = [X(:),Y(:)]';        
 end
 
+size(Data)
+
 z      = f(Data);
 
+size(z)
 
 %% Plot
 

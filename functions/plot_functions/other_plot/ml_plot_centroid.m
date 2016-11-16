@@ -24,7 +24,7 @@ for n=1:N
         scatter(C(n,1),C(n,2),200,colors(n,:),'filled','MarkerEdgeColor',[0 0 0]);
         scatter(C(n,1),C(n,2),50,[0 0 0],'filled','MarkerFaceColor',[0 0 0]);
     elseif D == 3
-        scatter3(C(n,1),C(n,2),C(n,3),200,colors(n,:),'MarkerEdgeColor',[0 0 0]);
+        scatter3(C(n,1),C(n,2),C(n,3),200,colors(n,:),'filled','MarkerEdgeColor',[0 0 0]);
         scatter3(C(n,1),C(n,2),C(n,3),50,[0 0 0],'filled','MarkerFaceColor',[0 0 0]);
     end        
 end
