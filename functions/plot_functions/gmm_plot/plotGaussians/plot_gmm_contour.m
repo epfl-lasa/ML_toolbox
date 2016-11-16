@@ -15,7 +15,7 @@ end
 npts = 100;
 
 if ~exist('handle','var')
-    if Mu == 2
+    if M == 2
     handle = zeros(1,K);
         for k=1:K
             l = max(Priors);
@@ -29,7 +29,7 @@ if ~exist('handle','var')
     elseif M==3
         for k=1:K
             [V1,D1] = eig(Sigma(:,:,k));
-            [x_,y_,z_] = create3DgaussianEllipsoid(Mu(:,k),V1,STD*D1);
+            [x_,y_,z_] = create3DgaussianEllipsoid(Mu(:,k),V1,STD*D1^1/2);
             mesh(x_,y_,z_,'EdgeColor',color(k,:),'Edgealpha',0.1);
             hidden off
             hold on;

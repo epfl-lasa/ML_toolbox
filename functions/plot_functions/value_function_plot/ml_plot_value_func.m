@@ -61,11 +61,7 @@ switch regr_type
         Data = [X(:),Y(:)]';        
 end
 
-size(Data)
-
 z      = f(Data);
-
-size(z)
 
 %% Plot
 
