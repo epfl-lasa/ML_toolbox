@@ -25,14 +25,16 @@ R           = zeros(num_classes,1);
 % M(i,j) number of elements of class i, classified as class j
 % M(j,i) number of elements of class j, classified as class i
 
+% Precision and Recall
 for i=1:num_classes
    P(i) = M(i,i) / (sum(M(:,i)) + realmin); 
    R(i) = M(i,i) / (sum(M(i,:)) + realmin);
 end
 
-F = (P .* R) ./ (P + R + realmin);
+% F1-Score: Harmonic Mean of Precision and Recall
+F = 2 .* (P .* R) ./ (P + R + realmin);
 
-% accuracy: the sum of correct classifications divided by the total number
+% Accuracy: the sum of correct classifications divided by the total number
 %           of classifications
 A = sum(diag(M))/(sum(M(:)) + realmin);
 

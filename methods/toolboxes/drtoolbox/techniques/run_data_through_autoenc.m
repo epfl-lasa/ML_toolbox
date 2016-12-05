@@ -28,7 +28,7 @@ function [reconX, mappedX] = run_data_through_autoenc(network, X)
     activations = [X ones(n, 1)];
     for i=1:no_layers
         if i ~= middle_layer && i ~= no_layers
-            activations = [1 ./ (1 + exp(-(activations * [network{i}.W; network{i}.bias_upW]))) ones(n, 1)];
+            activations = [1 ./ (1 + exp(-(activations * [network{i}.Wprobab; network{i}.bias_upW]))) ones(n, 1)];
         else
             activations = [activations * [network{i}.W; network{i}.bias_upW] ones(n, 1)];
             if i == middle_layer
