@@ -67,7 +67,8 @@ function [gf] = gfit2(t,y,gFitMeasure,options)
 % 30 JUN 2009: Added verbose option
 % ***********************************************************************
 %% INPUT ARGUMENTS CHECK
-    error(nargchk(2,4,nargin));
+%     error(nargchk(2,4,nargin));
+    narginchk(2,4);
     
     % reshape matrices into vectors (order of data is not important)
     t = reshape(t,1,[]);
