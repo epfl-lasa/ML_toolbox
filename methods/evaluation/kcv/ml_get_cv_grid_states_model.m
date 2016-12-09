@@ -1,4 +1,4 @@
-function [ stats ] = ml_get_cv_grid_states(test,train)
+function [ stats ] = ml_get_cv_grid_states_model(test,train)
 %ML_GET_CV_GRID_STATS Compute statistics on K-fold Cross Validation (CV).
 %
 %   input -----------------------------------------------------------------

@@ -24,7 +24,7 @@ title_name = options.title;
 handle = figure('Color', [1 1 1]);
 hold on;
 
-[P, N] = size(stats.test.acc.mean');
+[P, N] = size(stats.train.acc.mean');
 
 if P > 1 && N > 1
            
@@ -32,10 +32,10 @@ if P > 1 && N > 1
         x = options.param_ranges(2,:);
         y = options.param_ranges(1,:);
         
-        subplot(1, 2, 1)  
+        subplot(2, 3, 1)  
         z = stats.train.acc.mean;
         contourf(x,y,z)        
-        title('Train Mean Accuracy')        
+        title('Train Accuracy')        
         xlabel(options.param_names(2))
         ylabel(options.param_names(1))
 
@@ -43,17 +43,77 @@ if P > 1 && N > 1
         grid off
         axis square
 
-        subplot(1, 2, 2)          
-        z = stats.test.acc.mean;
+        subplot(2, 3, 2)  
+        z = stats.train.fmeasure.mean;
         contourf(x,y,z)        
-        title('Test Mean Accuracy')        
+        title('Train F-measure')        
         xlabel(options.param_names(2))
         ylabel(options.param_names(1))
+
+        colorbar
+        grid off
+        axis square
+        
+        subplot(2, 3, 3)  
+        z = stats.train.fpr.mean;
+        contourf(x,y,z)        
+        title('Train FPR (Fall-out)')        
+        xlabel(options.param_names(2))
+        ylabel(options.param_names(1))
+
+        colorbar
+        grid off
+        axis square
+        
+        
+        subplot(2, 3, 4)  
+        z = stats.train.tnr.mean;
+        contourf(x,y,z)        
+        title('Train TNR (Specificity)')        
+        xlabel(options.param_names(2))
+        ylabel(options.param_names(1))
+
+        colorbar
+        grid off
+        axis square
+        
+        
+        subplot(2, 3, 5)  
+        z = stats.model.ratioSV.mean;
+        contourf(x,y,z)        
+        title('% of SV/M Datapoints')        
+        xlabel(options.param_names(2))
+        ylabel(options.param_names(1))
+
+        colorbar
+        grid off
+        axis square
+        
+        
+        subplot(2, 3, 6)  
+        z = stats.model.boundSV.mean;
+        contourf(x,y,z)        
+        title('% of Bounded SVs / Total SVs')        
+        xlabel(options.param_names(2))
+        ylabel(options.param_names(1))
+
         colorbar
         grid off
         axis square
         
         suptitle(title_name)
+        
+        if isfield(stats,'test')
+            z = stats.test.acc.mean;
+            contourf(x,y,z)
+            title('Test Mean Accuracy')
+            xlabel(options.param_names(2))
+            ylabel(options.param_names(1))
+            colorbar
+            grid off
+            axis square
+        end
+        
                
 else
     

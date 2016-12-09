@@ -76,7 +76,9 @@ if strcmp(ml_type,'classification')
     train_eval.ratioSV    = zeros(1,K);
     train_eval.posSV      = zeros(1,K);
     train_eval.negSV      = zeros(1,K);
-    train_eval.boundSV    = zeros(1,K);            
+    train_eval.boundSV    = zeros(1,K);
+        
+    
     
     
 elseif strcmp(ml_type,'regression')
@@ -118,11 +120,11 @@ if K == 1 % Do grid search on data - no cv
         [train_eval,test_eval] = ml_kcv_clustering_eval(X,labels,g,train,test,k,train_eval,test_eval);
         
         % Model Statistics for SVM
-        train_eval.totSV         = model.totalSV;
-        train_eval.ratioSV       = model.totalSV/length(train);
-        train_eval.posSV         = model.nSV(1)/model.totalSV;
-        train_eval.negSV         = model.nSV(2)/model.totalSV;
-        train_eval.boundSV       = sum(abs(model.sv_coef) == C)/model.totalSV;
+        train_eval.totSV(k)      = model.totalSV;
+        train_eval.ratioSV(k)    = model.totalSV/length(train);
+        train_eval.posSV(k)      = model.nSV(1)/model.totalSV;
+        train_eval.negSV(k)      = model.nSV(2)/model.totalSV;
+        train_eval.boundSV(k)    = sum(abs(model.sv_coef) == C)/model.totalSV;
         
         
     elseif strcmp(ml_type,'regression')
@@ -130,6 +132,8 @@ if K == 1 % Do grid search on data - no cv
         [train_eval,test_eval] = ml_kcv_regression_eval(X,labels,g,train,test,k,train_eval,test_eval);
         
     end
+    
+    disp('....Grid Search finished!');
     
 else    % Do proper cv on split data
     
@@ -166,20 +170,11 @@ else    % Do proper cv on split data
             
         end
         
-        % Model Statistics for SVM
-        train_eval.totSV(k)      = model.totalSV;
-        train_eval.ratioSV(k)    = model.totalSV/length(train);
-        train_eval.posSV(k)      = model.nSV(1)/model.totalSV;
-        train_eval.negSV(k)      = model.nSV(2)/model.totalSV;
-        train_eval.boundSV(k)    = sum(abs(model.sv_coef) == C)/model.totalSV;
-        
         
     end
     
-
+    disp('....CV finished!');
 end
-
-disp('....CV finished!');
 
 end
 
