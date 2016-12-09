@@ -51,8 +51,8 @@ for i=1:length(range_p1)
         
 
         f = @(X,labels,model)svm_classifier(X, labels, options, model);        
-        [test_eval,train_eval] = ml_kcv(X,labels,options.K,f,'classification');
-
+        [test_eval,train_eval] = ml_kcv(X,labels,options.K,f,'classification',options.C);
+        
         ctest{i,j}  = test_eval;
         ctrain{i,j} = train_eval;
     end

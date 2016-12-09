@@ -1,4 +1,4 @@
-function [test_eval,train_eval] = ml_kcv(X,labels,K,f,ml_type)
+function [test_eval,train_eval] = ml_kcv(X,labels,K,f,ml_type,C)
 %ML_KCV K-fold Cross-Validation
 %
 %  input ------------------------------------------------------------------
@@ -40,7 +40,6 @@ function [test_eval,train_eval] = ml_kcv(X,labels,K,f,ml_type)
 %                              instead done on the test data.
 %
 
-
 N           = size(X,1);
 idx         = randperm(N);
 bin_size    = round(N/K);
@@ -61,14 +60,18 @@ if strcmp(ml_type,'classification')
     num_class           = length(unique(labels));
 
     train_eval.accuracy  = zeros(1,K);
-    train_eval.precision = zeros(num_class,K);
-    train_eval.recall    = zeros(num_class,K);
-    train_eval.fmeasure  = zeros(num_class,K);
+%     train_eval.precision = zeros(num_class,K);
+%     train_eval.recall    = zeros(num_class,K);
+    train_eval.fmeasure  = zeros(1,K);
+    train_eval.fpr       = zeros(1,K);
+    train_eval.tnr       = zeros(1,K);
     
     test_eval.accuracy   = zeros(1,K);
     test_eval.precision  = zeros(num_class,K);
     test_eval.recall     = zeros(num_class,K);
     test_eval.fmeasure   = zeros(num_class,K);
+    
+    
     
 elseif strcmp(ml_type,'regression')
     
@@ -92,21 +95,15 @@ else
     
 end
 
-disp(' ');
-disp('starting K-fold Cross-Validation');
-disp(' ');
 
-for k=1:K
+if K == 1 % Do grid search on data - no cv
     
-    disp([num2str(k) '/' num2str(K)]);
+    disp(' ');
+    disp('starting Grid Search');
+    disp(' ');
     
-    train_idx    = 1:K;
-    train_idx(k) = [];
-    
-    test         = bins{k};
-    train        = cell2mat(bins(train_idx));
-    
-    disp(['train pts ' num2str(length(train)) '/ test pts ' num2str(length(test))]);
+    train = 1:length(labels);
+    test  = 0;
     
     % Train the classifier
     [~,model]    = f(X(train(:),:),labels(train(:)),[]);
@@ -118,17 +115,62 @@ for k=1:K
         
         [train_eval,test_eval] = ml_kcv_clustering_eval(X,labels,g,train,test,k,train_eval,test_eval);
         
+        % Model Statistics for SVM
+        train_eval.totSV      = model.totalSV;
+        train_eval.ratioSV    = model.totalSV/length(train);
+        train_eval.posSV      = model.nSV(1)/model.totalSV;
+        train_eval.negSV      = model.nSV(2)/model.totalSV;
+        train_eval.boundSV    = sum(abs(model.sv_coef) == C)/model.totalSV;
+        
+        
     elseif strcmp(ml_type,'regression')
         
         [train_eval,test_eval] = ml_kcv_regression_eval(X,labels,g,train,test,k,train_eval,test_eval);
-
+        
     end
-       
     
+    disp('....Grid Search finished!');
+    
+else    % Do proper cv on split data
+    
+    
+    disp(' ');
+    disp('starting K-fold Cross-Validation');
+    disp(' ');
+
+    for k=1:K
+        
+        disp([num2str(k) '/' num2str(K)]);
+        
+        train_idx    = 1:K;
+        train_idx(k) = [];
+        
+        test         = bins{k};
+        train        = cell2mat(bins(train_idx));
+        
+        disp(['train pts ' num2str(length(train)) '/ test pts ' num2str(length(test))]);
+        
+        % Train the classifier
+        [~,model]    = f(X(train(:),:),labels(train(:)),[]);
+        
+        % g is the trained classifier
+        g           = @(X)f(X,[],model);
+        
+        if strcmp(ml_type,'classification')
+            
+            [train_eval,test_eval] = ml_kcv_clustering_eval(X,labels,g,train,test,k,train_eval,test_eval);
+            
+        elseif strcmp(ml_type,'regression')
+            
+            [train_eval,test_eval] = ml_kcv_regression_eval(X,labels,g,train,test,k,train_eval,test_eval);
+            
+        end
+        
+        
+    end
+    
+    disp('....CV finished!');
 end
-
-disp('....CV finished!');
-
 
 end
 

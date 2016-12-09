@@ -29,28 +29,33 @@ function [train_eval,test_eval] = ml_kcv_clustering_eval(X,labels,g,train,test,k
  % Evaluate classifier on train data
     
     M           = ml_confusion_matrix(X(train(:),:),labels(train(:)),g);
-    [A,P,R,F]   = ml_confusion_matrix_evaluation(M);
+    [A, P, R, F, FPR, TNR]   = ml_confusion_matrix_evaluation(M);
     
-    train_eval.accuracy(k)      = A;
-    train_eval.precision(:,k)   = P;
-    train_eval.recall(:,k)      = R;
-    train_eval.fmeasure(:,k)    = F;
-    
-    % Evaluate classifier on test data
-    
-    if(length(varargin) == 0)
-        M           = ml_confusion_matrix(X(test(:),:),labels(test(:)),g);
-    else
-        labelsTest = varargin{1};
-        M           = ml_confusion_matrix(X(test(:),:),labelsTest(test(:)),g);
+    if isempty(k)
+        k = 1;
     end
+    train_eval.accuracy(k)    = A;
+%     train_eval.precision(:,k) = P;
+%     train_eval.recall(:,k)    = R;
+    train_eval.fmeasure(k)    = F;
+    train_eval.fpr(k)         = FPR;
+    train_eval.tnr(k)         = TNR;    
     
-    [A,P,R,F]   = ml_confusion_matrix_evaluation(M);
-
-    test_eval.accuracy(k)       = A;
-    test_eval.precision(:,k)    = P;
-    test_eval.recall(:,k)       = R;
-    test_eval.fmeasure(:,k)     = F;    
-
+    if (test~=0)
+        % Evaluate classifier on test data
+        if(length(varargin) == 0)
+            M           = ml_confusion_matrix(X(test(:),:),labels(test(:)),g);
+        else
+            labelsTest = varargin{1};
+            M           = ml_confusion_matrix(X(test(:),:),labelsTest(test(:)),g);
+        end
+        
+        [A,P,R,F]   = ml_confusion_matrix_evaluation(M);
+        
+        test_eval.accuracy(k)       = A;
+        test_eval.precision(:,k)    = P;
+        test_eval.recall(:,k)       = R;
+        test_eval.fmeasure(:,k)     = F;
+    end
 end
 
