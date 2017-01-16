@@ -60,16 +60,18 @@ if strcmp(ml_type,'classification')
     num_class           = length(unique(labels));
 
     train_eval.accuracy  = zeros(1,K);
-%     train_eval.precision = zeros(num_class,K);
-%     train_eval.recall    = zeros(num_class,K);
+    %     train_eval.precision = zeros(num_class,K);
+    %     train_eval.recall    = zeros(num_class,K);
     train_eval.fmeasure  = zeros(1,K);
     train_eval.fpr       = zeros(1,K);
     train_eval.tnr       = zeros(1,K);
     
     test_eval.accuracy   = zeros(1,K);
-    test_eval.precision  = zeros(num_class,K);
-    test_eval.recall     = zeros(num_class,K);
-    test_eval.fmeasure   = zeros(num_class,K);
+    %     train_eval.precision = zeros(num_class,K);
+    %     train_eval.recall    = zeros(num_class,K);
+    test_eval.fmeasure  = zeros(1,K);
+    test_eval.fpr       = zeros(1,K);
+    test_eval.tnr       = zeros(1,K);
     
     % Model Statistics for SVM
     train_eval.totSV      = zeros(1,K);

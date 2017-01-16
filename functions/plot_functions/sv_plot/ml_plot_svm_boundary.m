@@ -54,8 +54,13 @@ end
 
 % Plot the SVM Decision Boundaries
 contour(X,Y, vals, [0 0], 'LineWidth', 2, 'Color', 'k');
-contour(X,Y, vals, [1 1], 'LineWidth', 0.5, 'Color', 'r');
-contour(X,Y, vals, [-1 -1], 'LineWidth', 0.5, 'Color', 'g');
+
+contour(X,Y, vals, [1 1], 'LineWidth', 2, 'Color', 'r');
+% contour(X,Y, vals, [2 2], 'LineWidth', 0.5, 'Color', 'r');
+
+contour(X,Y, vals, [-1 -1], 'LineWidth', 2, 'Color', 'g');
+% contour(X,Y, vals, [-2 -2], 'LineWidth', 0.5, 'Color', 'g');
+
 
 % Plot the training data on top of the boundary
 pos = find(labels == 1);

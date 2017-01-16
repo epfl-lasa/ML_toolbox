@@ -1,4 +1,4 @@
-function [predict_labels, model] = svm_classifier(X,labels,svm_options,model)
+function [predict_labels, model, dec_vals] = svm_classifier(X,labels,svm_options,model)
 %SVM_CLASSIFIER.
 %
 %   input ----------------------------------------------------------------
@@ -26,7 +26,7 @@ if isempty(model)
 end
 
 % Compute accuracy of learnt classifier on training data
-[predict_labels, ~ , ~] = svm_predict(X, labels, model);
+[predict_labels, ~,dec_vals] = svm_predict(X, labels, model);
 
 
 end

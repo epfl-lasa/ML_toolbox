@@ -42,5 +42,4 @@ end
 % Need to use evalc here to suppress LIBSVM accuracy printouts
 [T,predict_label, accuracy, dec_values] = evalc('svmpredict(labels, sparse(data), model)');
 
-
 end

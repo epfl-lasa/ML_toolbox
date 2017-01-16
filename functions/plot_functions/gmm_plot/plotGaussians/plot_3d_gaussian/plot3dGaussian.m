@@ -33,8 +33,8 @@ for k = 1:K
     
     scatter3(Mus(1,k),Mus(2,k),Mus(3,k),2,'filled','ko');
     sh = surfl(xp, yp, zp);
-    set(sh,'FaceColor',[0.5,0.5,0.5],'FaceAlpha',weights(k),'EdgeColor','none')
-
+%     set(sh,'FaceColor',[0.5,0.5,0.5],'FaceAlpha',weights(k),'EdgeColor','none')
+    set(sh,'FaceColor',[1,0,0],'FaceAlpha',weights(k),'EdgeColor','none')
 
 
 end

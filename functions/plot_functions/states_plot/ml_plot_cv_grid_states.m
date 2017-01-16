@@ -104,14 +104,58 @@ if P > 1 && N > 1
         suptitle(title_name)
         
         if isfield(stats,'test')
+            
+            handle2 = figure('Color', [1 1 1]);
+            hold on;
+            colormap hot;
+            x = options.param_ranges(2,:);
+            y = options.param_ranges(1,:);
+            
+            subplot(2, 2, 1)
             z = stats.test.acc.mean;
             contourf(x,y,z)
-            title('Test Mean Accuracy')
+            title('Test Accuracy')
             xlabel(options.param_names(2))
             ylabel(options.param_names(1))
+            
             colorbar
             grid off
             axis square
+            
+            subplot(2, 2, 2)
+            z = stats.test.fmeasure.mean;
+            contourf(x,y,z)
+            title('Test F-measure')
+            xlabel(options.param_names(2))
+            ylabel(options.param_names(1))
+            
+            colorbar
+            grid off
+            axis square
+            
+            subplot(2, 2, 3)
+            z = stats.test.fpr.mean;
+            contourf(x,y,z)
+            title('Test FPR (Fall-out)')
+            xlabel(options.param_names(2))
+            ylabel(options.param_names(1))
+            
+            colorbar
+            grid off
+            axis square
+            
+            
+            subplot(2, 2, 4)
+            z = stats.test.tnr.mean;
+            contourf(x,y,z)
+            title('Test TNR (Specificity)')
+            xlabel(options.param_names(2))
+            ylabel(options.param_names(1))
+            
+            colorbar
+            grid off
+            axis square
+            
         end
         
                

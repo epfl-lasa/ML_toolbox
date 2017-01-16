@@ -28,15 +28,15 @@ function [train_eval,test_eval] = ml_kcv_clustering_eval(X,labels,g,train,test,k
 
  % Evaluate classifier on train data
     
-    M           = ml_confusion_matrix(X(train(:),:),labels(train(:)),g);
+    M                        = ml_confusion_matrix(X(train(:),:),labels(train(:)),g);
     [A, P, R, F, FPR, TNR]   = ml_confusion_matrix_evaluation(M);
     
     if isempty(k)
         k = 1;
     end
     train_eval.accuracy(k)    = A;
-%     train_eval.precision(:,k) = P;
-%     train_eval.recall(:,k)    = R;
+    %     train_eval.precision(:,k) = P;
+    %     train_eval.recall(:,k)    = R;
     train_eval.fmeasure(k)    = F;
     train_eval.fpr(k)         = FPR;
     train_eval.tnr(k)         = TNR;    
@@ -50,12 +50,14 @@ function [train_eval,test_eval] = ml_kcv_clustering_eval(X,labels,g,train,test,k
             M           = ml_confusion_matrix(X(test(:),:),labelsTest(test(:)),g);
         end
         
-        [A,P,R,F]   = ml_confusion_matrix_evaluation(M);
+        [A, P, R, F, FPR, TNR]   = ml_confusion_matrix_evaluation(M);
         
-        test_eval.accuracy(k)       = A;
-        test_eval.precision(:,k)    = P;
-        test_eval.recall(:,k)       = R;
-        test_eval.fmeasure(:,k)     = F;
+        test_eval.accuracy(k)    = A;
+        %     train_eval.precision(:,k) = P;
+        %     train_eval.recall(:,k)    = R;
+        test_eval.fmeasure(k)    = F;
+        test_eval.fpr(k)         = FPR;
+        test_eval.tnr(k)         = TNR;
     end
 end
 
