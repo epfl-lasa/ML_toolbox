@@ -154,8 +154,9 @@ if P > 1 && N > 1
             
             colorbar
             grid off
-            axis square
+            axis square          
             
+            suptitle(title_name)
         end
         
                
