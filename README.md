@@ -7,6 +7,8 @@ Go to the ```./examples``` folder to run some simple demos and examples from eac
 --
 
 #### Tutorials
+For access to the ```tutorials-spring-2016``` contact the current maintainer.
+
 ##### Non-linear Dimensionality Reduction
 Topics covered: kernel Princical Component Analysis (kPCA), Laplacian Eigenmaps, Isomaps.
 
