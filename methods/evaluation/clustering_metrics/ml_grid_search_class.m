@@ -8,11 +8,27 @@ function [ ctest, ctrain, cranges ] = ml_grid_search_class( X, labels, options )
 ctest  = cell(options.K,1);
 ctrain = cell(options.K,1);
 
+% Check if Parameter Ranges Should in in linearly or log spaced
+log_grid = 0;
+if isfield(options,'log_grid')
+   if (options.log_grid == 1)
+       log_grid = 1;
+   end
+end
+
 switch options.svm_type
-    case 0
-        range_p1 = linspace(options.limits_C(1), options.limits_C(2), options.steps);
+    case 0       
+        if log_grid
+            range_p1 = logspace(log10(options.limits_C(1)),log10(options.limits_C(2)),options.steps);
+        else
+            range_p1 = linspace(options.limits_C(1), options.limits_C(2), options.steps);
+        end
     case 1
-        range_p1 = linspace(options.limits_nu(1), options.limits_nu(2), options.steps);
+        if log_grid
+            range_p1 = logspace(log10(options.limits_nu(1)), log10(options.limits_nu(2)), options.steps);
+        else
+            range_p1 = linspace(options.limits_nu(1), options.limits_nu(2), options.steps);
+        end
 end
 
 
@@ -25,28 +41,41 @@ end
 
 switch kernel_type
     case 0 
-         range_p2 = linspace(options.limits_w(1), options.limits_w(2), options.steps);
+        if log_grid
+            range_p2 = logspace(log10(options.limits_w(1)), log10(options.limits_w(2)), options.steps);
+        else            
+            range_p2 = linspace(options.limits_w(1), options.limits_w(2), options.steps);
+        end
     case 1
-         range_p2 = linspace(options.limits_d(1), options.limits_d(2), options.steps);
+        if log_grid
+            range_p2 = logspace(log10(options.limits_d(1)), log10(options.limits_d(2)), options.steps);
+        else            
+            range_p2 = linspace(options.limits_d(1), options.limits_d(2), options.steps);
+        end
 end
 
 for i=1:length(range_p1)
     for j=1:length(range_p2)
         
         disp([num2str(i) '/' num2str(length(range_p1)) ,',', num2str(j) '/' num2str(length(range_p2)) ]);
+        
          
         switch options.svm_type
             case 0
-                options.C       = range_p1(i);
+                options.C     = range_p1(i);
+                fprintf('Evaluating Param C: %f ', options.C);
             case 1
-                options.nu       = range_p1(i);
+                options.nu    = range_p1(i);
+                fprintf('Evaluating Param $\nu$: %f ', options.nu);
         end       
         
         switch kernel_type
             case 0 
                 options.sigma    = range_p2(j); 
+                fprintf('with sigma: %f \n', options.sigma);
             case 1
                 options.degree   = range_p2(j);
+                fprintf('with p: %f \n', options.degree);
         end
         
 
