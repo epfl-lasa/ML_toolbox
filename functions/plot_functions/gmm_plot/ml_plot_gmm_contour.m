@@ -18,7 +18,7 @@ if ~exist('handle','var')
     handle = zeros(1,K);
     for k=1:K
         l = max(Priors);
-        for i=3:(-1):STD
+        for i=1:(-1):STD
             w = Priors(k)/l;
             handle(k) = plot_gaussian_ellipsoid(Mu(:,k),Sigma(:,:,k),i,npts,haxes,w,color(k,:));
             %set(handle(k),'LineWidth',2);

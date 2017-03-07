@@ -21,7 +21,7 @@ function [X,labels,gmm] = ml_clusters_data(num_samples,dim,num_classes)
 min_dist_clusters   = 2;           % minimum distance between the cluster centers
 K                   = num_classes; % number of Gaussian functions
 cov_type            = 'iso';       % covariance type [full,diag,iso]
-max_cov_std         = 0.4;
+max_cov_std         = 0.8;
 min_cov_std         = 0.1;
 
 % Parameters of the GMM

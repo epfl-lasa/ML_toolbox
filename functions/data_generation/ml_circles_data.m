@@ -25,7 +25,7 @@ X       = [];
 labels  = [];
 
 width   = 0.5;
-spacing = 0.5;        
+spacing = 0.75;        
 noise_r = 0.1; % variance of noise for the radius
 
 % number of data points per class

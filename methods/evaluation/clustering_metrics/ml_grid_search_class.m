@@ -16,6 +16,7 @@ if isfield(options,'log_grid')
    end
 end
 
+log_grid
 switch options.svm_type
     case 0       
         if log_grid
@@ -53,6 +54,9 @@ switch kernel_type
             range_p2 = linspace(options.limits_d(1), options.limits_d(2), options.steps);
         end
 end
+
+range_p1
+range_p2
 
 for i=1:length(range_p1)
     for j=1:length(range_p2)

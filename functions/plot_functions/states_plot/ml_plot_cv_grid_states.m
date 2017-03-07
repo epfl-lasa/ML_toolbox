@@ -19,6 +19,7 @@ function [ handle ] = ml_plot_cv_grid_states(stats,options)
 
 
 if ~isfield(options,'title'),options.title = 'add a title in options.title'; end
+if ~isfield(options,'log_grid'),options.log_grid = 0'; end
 
 title_name = options.title;
 handle = figure('Color', [1 1 1]);
@@ -34,7 +35,11 @@ if P > 1 && N > 1
         
         subplot(2, 3, 1)  
         z = stats.train.acc.mean;
-        contourf(x,y,z)        
+        contourf(x,y,z)      
+        if (options.log_grid ==1)
+            set(gca,'xscale','log')
+            set(gca,'yscale','log')
+        end
         title('Train Accuracy')        
         xlabel(options.param_names(2))
         ylabel(options.param_names(1))
@@ -45,7 +50,13 @@ if P > 1 && N > 1
 
         subplot(2, 3, 2)  
         z = stats.train.fmeasure.mean;
-        contourf(x,y,z)        
+        contourf(x,y,z)     
+        
+        if (options.log_grid ==1)
+            set(gca,'xscale','log')
+            set(gca,'yscale','log')
+        end
+               
         title('Train F-measure')        
         xlabel(options.param_names(2))
         ylabel(options.param_names(1))
@@ -57,6 +68,10 @@ if P > 1 && N > 1
         subplot(2, 3, 3)  
         z = stats.train.fpr.mean;
         contourf(x,y,z)        
+        if (options.log_grid ==1)
+            set(gca,'xscale','log')
+            set(gca,'yscale','log')
+        end
         title('Train FPR (Fall-out)')        
         xlabel(options.param_names(2))
         ylabel(options.param_names(1))
@@ -69,6 +84,10 @@ if P > 1 && N > 1
         subplot(2, 3, 4)  
         z = stats.train.tnr.mean;
         contourf(x,y,z)        
+        if (options.log_grid ==1)
+            set(gca,'xscale','log')
+            set(gca,'yscale','log')
+        end
         title('Train TNR (Specificity)')        
         xlabel(options.param_names(2))
         ylabel(options.param_names(1))
@@ -81,6 +100,10 @@ if P > 1 && N > 1
         subplot(2, 3, 5)  
         z = stats.model.ratioSV.mean;
         contourf(x,y,z)        
+        if (options.log_grid ==1)
+            set(gca,'xscale','log')
+            set(gca,'yscale','log')
+        end
         title('% of SV/M Datapoints')        
         xlabel(options.param_names(2))
         ylabel(options.param_names(1))
@@ -93,6 +116,10 @@ if P > 1 && N > 1
         subplot(2, 3, 6)  
         z = stats.model.boundSV.mean;
         contourf(x,y,z)        
+        if (options.log_grid ==1)
+            set(gca,'xscale','log')
+            set(gca,'yscale','log')
+        end
         title('% of Bounded SVs / Total SVs')        
         xlabel(options.param_names(2))
         ylabel(options.param_names(1))
@@ -114,6 +141,10 @@ if P > 1 && N > 1
             subplot(2, 2, 1)
             z = stats.test.acc.mean;
             contourf(x,y,z)
+            if (options.log_grid ==1)
+                set(gca,'xscale','log')
+                set(gca,'yscale','log')
+            end
             title('Test Accuracy')
             xlabel(options.param_names(2))
             ylabel(options.param_names(1))
@@ -125,6 +156,11 @@ if P > 1 && N > 1
             subplot(2, 2, 2)
             z = stats.test.fmeasure.mean;
             contourf(x,y,z)
+            if (options.log_grid ==1)
+                set(gca,'xscale','log')
+                set(gca,'yscale','log')
+            end
+            
             title('Test F-measure')
             xlabel(options.param_names(2))
             ylabel(options.param_names(1))
@@ -136,6 +172,10 @@ if P > 1 && N > 1
             subplot(2, 2, 3)
             z = stats.test.fpr.mean;
             contourf(x,y,z)
+            if (options.log_grid ==1)
+                set(gca,'xscale','log')
+                set(gca,'yscale','log')
+            end
             title('Test FPR (Fall-out)')
             xlabel(options.param_names(2))
             ylabel(options.param_names(1))
@@ -148,6 +188,10 @@ if P > 1 && N > 1
             subplot(2, 2, 4)
             z = stats.test.tnr.mean;
             contourf(x,y,z)
+            if (options.log_grid ==1)
+                set(gca,'xscale','log')
+                set(gca,'yscale','log')
+            end
             title('Test TNR (Specificity)')
             xlabel(options.param_names(2))
             ylabel(options.param_names(1))

@@ -2,9 +2,9 @@
 clear all; close all;
 %%
 
-num_samples     = 100;
-num_classes     = 2;
-dim             = 2;
+num_samples     = 200;
+num_classes     = 3;
+dim             = 3;
 [X,labels,gmm]  = ml_clusters_data(num_samples,dim,num_classes);
 
 options.labels   = labels;

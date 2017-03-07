@@ -33,7 +33,7 @@ elseif display_mode==2
   nbDrawingSeg = 40;
   t = linspace(-pi, pi, nbDrawingSeg)';
   for j=1:nbData
-    stdev = sqrtm(3.0.*Sigma(:,:,j));
+    stdev = 2*sqrtm(3.0.*Sigma(:,:,j));
     X = [cos(t) sin(t)] * real(stdev) + repmat(Mu(:,j)',nbDrawingSeg,1);
     patch(X(:,1), X(:,2), lightcolor, 'LineStyle', 'none');
   end

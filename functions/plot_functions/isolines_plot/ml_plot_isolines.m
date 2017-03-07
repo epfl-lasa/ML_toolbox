@@ -92,8 +92,11 @@ if num_eigs == 1
     
     if b_plot_surf == true
         surfc(Xs,Ys,reshape(proj_v{1},size(Xs)));
+        shading interp
+        
     else
         contourf(Xs,Ys,reshape(proj_v{1},size(Xs)), num_contour); 
+        
     end
 
     
@@ -109,10 +112,10 @@ if num_eigs == 1
     eig_val = kernel_data.eigen_values(eigen_idx(1));
     eig_val = round(eig_val * 100) / 100;
     
-    title(['Eigen(' num2str(eigen_idx(1)) ')  Eig-val: ' num2str(eig_val) ],'FontSize',14);
+    title(['Eigen(' num2str(eigen_idx(1)) ')  Eig-val: ' num2str(eig_val) ],'FontSize',20, 'Interpreter','Latex');
     set(gca,'FontSize',14);
-    xlabel('x','FontSize',14);
-    ylabel('y','FontSize',14);
+    xlabel('x_1','FontSize',14);
+    ylabel('x_2','FontSize',14);
     colormap hot
     colorbar;
     axis square
@@ -136,8 +139,7 @@ else
        subaxis(m,n,p,'Spacing', 0.05, 'Padding', 0, 'Margin', 0.05);
        
         if b_plot_surf == true
-            surfc(Xs,Ys,reshape(proj_v{p},size(Xs)));
-            
+            surfc(Xs,Ys,reshape(proj_v{p},size(Xs)));                       
         else
             contourf(Xs,Ys,reshape(proj_v{p},size(Xs)), num_contour); 
         end
@@ -155,8 +157,8 @@ else
        eig_val = round(eig_val * 100) / 100;
 
        title(['Eigen(' num2str(eigen_idx(p)) ') Eig-val: ' num2str(eig_val) ],'FontSize',8);
-       xlabel('x','FontSize',8);
-       ylabel('y','FontSize',8); 
+       xlabel('x_1','FontSize',8);
+       ylabel('x_2','FontSize',8); 
        set(gca,'FontSize',8);       
        colormap hot
        if b_plot_colorbar == true, colorbar; end
