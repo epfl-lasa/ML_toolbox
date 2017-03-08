@@ -24,6 +24,7 @@ hold on;
 
 axis(limits);
 delete_trace = 0;
+clicked_clear = 0;
 
 % to store the data
 X = [];
@@ -58,7 +59,8 @@ stop_btn = uicontrol('style','pushbutton','String', 'Store Data','Callback',@sto
 % Label button
 label_btn = uicontrol('style','pushbutton','String', 'Change Label','Callback',@change_label, ...
           'position',[150 0 210 25], ...
-          'UserData', 2);            
+          'UserData', 1);            
+
 % Clear button
 uicontrol('style','pushbutton','String', 'Clear','Callback',@clear_data, ...
           'position',[400 0 110 25], ...
@@ -88,7 +90,8 @@ n_demonstrations = demonstration_index_monitor;
 %   n_polynomial :  Order of polynomial fit
 %   window_size :   Window length for the filter
     data = [];
-    for dem = 1:n_demonstrations
+    for dem = (clicked_clear+1):n_demonstrations 
+        n_demonstrations
         x_obs_dem = x_obs{dem}(1:2,:)';
         if (struct_output)
             data = [data  [x_obs{dem}(1:2,:); labels{dem}] ];
@@ -102,23 +105,24 @@ n_demonstrations = demonstration_index_monitor;
      
 return
 
-
 %% Functions for data capture
+% Clear data button function
+function clear_data(ObjectS, ~)
+    data = [];
+    X = [];
+    label_id = 1;
+    clicked_clear =  clicked_clear + 1
+    set(ObjectS, 'UserData', 0); % unclick button
+    delete(hp);
+end
+    
+    
 function stop_recording(ObjectS, ~)
     set(ObjectS, 'UserData', 0);
 end
 
 function change_label(ObjectS, ~)
     label_id = label_id + 1;
-end
-
-% Clear data button function
-function clear_data(ObjectS, ~)
-    set(ObjectS, 'UserData', 0); % unclick button
-    delete(hp);
-    delete(p_handle);
-    label_id = 1;
-    data = [];
 end
 
 function ret = button_clicked(~,~)
