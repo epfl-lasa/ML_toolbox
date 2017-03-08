@@ -24,7 +24,7 @@ hold on;
 
 axis(limits);
 delete_trace = 0;
-clicked_clear = 0;
+start_dem = 1;
 
 % to store the data
 X = [];
@@ -35,6 +35,7 @@ demonstration_index_monitor = 0;
 colors = hsv(10);
 % Labels
 label_id = 1;
+cleared_data = 0;
 
 % select our figure as gcf
 figure(fig);
@@ -90,8 +91,8 @@ n_demonstrations = demonstration_index_monitor;
 %   n_polynomial :  Order of polynomial fit
 %   window_size :   Window length for the filter
     data = [];
-    for dem = (clicked_clear+1):n_demonstrations 
-        n_demonstrations
+    start_dem = 1 + cleared_data;
+    for dem = start_dem:n_demonstrations         
         x_obs_dem = x_obs{dem}(1:2,:)';
         if (struct_output)
             data = [data  [x_obs{dem}(1:2,:); labels{dem}] ];
@@ -111,7 +112,7 @@ function clear_data(ObjectS, ~)
     data = [];
     X = [];
     label_id = 1;
-    clicked_clear =  clicked_clear + 1
+    cleared_data = demonstration_index;
     set(ObjectS, 'UserData', 0); % unclick button
     delete(hp);
 end
