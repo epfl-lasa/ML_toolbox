@@ -11,6 +11,7 @@ lambda = diag(L)';
 
 handle = figure;
 plot(lambda, '--b', 'LineWidth', 2)
+set(gca,'XTick',[1:1:length(lambda)])
 title('Eigenvalues')
 ylabel('Eigenvalues')
 xlabel('Eigenvector index')

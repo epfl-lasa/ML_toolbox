@@ -1,4 +1,4 @@
-function [mappedX, mapping] = kernel_pca(X, no_dims, varargin)
+function [mappedX, mapping] = kernel_pca(X, no_dims, norm_K, varargin)
 %KERNEL_PCA Perform the kernel PCA algorithm
 %
 %   [mappedX, mapping] = kernel_pca(X, no_dims)
@@ -42,21 +42,29 @@ function [mappedX, mapping] = kernel_pca(X, no_dims, varargin)
     end
     
     % Store the number of training and test points
-    ell = size(X, 1);
+    ell = size(X, 1)
 
     if size(X, 1) < 2000
 
         % Compute Gram matrix for training points
-        disp('Computing kernel matrix...'); 
+        disp('Computing kernel (Gram) matrix...'); 
         K = gram(X, X, kernel, param1, param2);
 
         % Normalize kernel matrix K
-        mapping.column_sums = sum(K) / ell;                       % column sums
-        mapping.total_sum   = sum(mapping.column_sums) / ell;     % total sum
-        J = ones(ell, 1) * mapping.column_sums;                   % column sums (in matrix)
-        K = K - J - J';
-        K = K + mapping.total_sum;
- 
+        if norm_K == true
+            disp('Normalizing kernel (Gram) matrix...');
+             I_M = eye(ell)*1/ell;              
+             I_MKI_M = (I_M*K)*I_M;
+%              K = K - (I_M * K) - (K * I_M);             
+%              K = K + I_MKI_M;
+             
+            mapping.column_sums = sum(K) / ell;                       % column sums
+            mapping.total_sum   = sum(mapping.column_sums) / ell;     % total sum
+            J = ones(ell, 1) * mapping.column_sums;                   % column sums (in matrix)
+            K = K - J - J';
+            K = K + mapping.total_sum;                       
+        end
+        
         % Compute first no_dims eigenvectors and store these in V, store corresponding eigenvalues in L
         disp('Eigenanalysis of kernel matrix...');
         K(isnan(K)) = 0;

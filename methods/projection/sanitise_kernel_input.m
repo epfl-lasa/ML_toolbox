@@ -15,6 +15,7 @@ end
 if ~isfield(options,'kpar')
    error('you have to specify options.kpar , the parameters of the kernel'); 
 end
+
 %% Check if the kernel name is supported
 
 switch options.kernel
