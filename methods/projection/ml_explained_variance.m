@@ -26,6 +26,7 @@ figure;
 plot(cum_expl_var, '--r', 'LineWidth', 2) ; hold on;
 plot(p,cum_expl_var(p),'or')
 title('Explained Variance from EigenValues')
+set(gca,'XTick',[1:1:length(eigs)])
 ylabel('% Cumulative Variance Explained')
 xlabel('Eigenvector index')
 grid on
