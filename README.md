@@ -45,6 +45,7 @@ Policy Iteration (PI) and Value Iteration (VI) in 2D grid world, Moutain car exa
 This toolbox includes 3rd party software for the implementation of a couple of algorithms, namely:
 - [Matlab Toolbox for Dimensionality Reduction](https://lvdmaaten.github.io/drtoolbox/)
 - [LibSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/)
+- [Kernel Methods Toolbox](https://github.com/steven2358/kmbox)
 - [SparseBayes Software](http://www.miketipping.com/downloads.htm)
 
 You DO NOT need to install these, they are already pre-packaged in this toolbox.
