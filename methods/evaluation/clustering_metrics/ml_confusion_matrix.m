@@ -23,7 +23,7 @@ num_classes = length(class_id);
 M           = zeros(num_classes,num_classes);
 % predicted class label
 hc          = f(X);
-tmp         = [hc(:),labels(:)];
+tmp         = [labels(:),hc(:)];
 
 
 for i=1:num_classes

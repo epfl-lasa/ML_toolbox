@@ -1,6 +1,11 @@
-%% Example of Gaussian Process Regression (1D)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Gaussian Process Regression 1D Example  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%               1) Load 1D Regression Datasets               %%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Generate Data
-
+clear all; close all; clc;
 nbSamples   = 100;
 epsilon     = 0.2;
 X           = linspace(0,50,nbSamples);
@@ -18,12 +23,15 @@ y(id) = [];
 % Plot data
 options             = [];
 options.points_size = 10;
+options.plot_labels = {'x','y'};
 options.title       = 'noisy sinusoidal data'; 
 
 if exist('h1','var') && isvalid(h1), delete(h1);end
 h1      = ml_plot_data([X(:),y(:)],options);
 
-
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                 2) "Train" GPR Model                       %%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Train GP (no real training, just give parameters)
 
 model.X_train   = X;
@@ -33,11 +41,14 @@ rbf_var         = 5;
 gp_f            = @(X)ml_gpr(X,[],model,epsilon,rbf_var);
 
 
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%           3) Test GPR Model on Train points                %%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Plot GPR
-
 options             = [];
 options.points_size = 10;
 options.title       = 'GPR'; 
+options.plot_labels = {'x','y'};
 
 if exist('h2','var') && isvalid(h2), delete(h2);end
 h2  = ml_plot_data([X(:),y(:)],options);
@@ -47,12 +58,14 @@ options = [];
 options.bFigure = false;
 gp_plot(X,gp_f,1,options);
 
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%           4) Grid Search for GPR with RBF Kernel           %%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% K-fold cross validation 
 
 Kfold = 10;
-
 disp('Parameter grid search GP');
-
 rbf_vars = [0.01,0.1,1,2,5,10,20,40,50,100];
 
 test  = cell(length(rbf_var),1);
@@ -73,7 +86,6 @@ for i=1:length(rbf_vars)
 end
 
 %% Get Statistics
-
 [ stats ] = ml_get_cv_grid_states_regression(test,train);
 
 %% Plot Statistics

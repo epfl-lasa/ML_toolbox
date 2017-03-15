@@ -1,6 +1,11 @@
-%% Bayesian Linear Regression Example
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Bayesian Linear Regression 1D Example  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%          1) Generate 1D Regression Datasets                %%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Generate some data
-
+clear all;close all;clc;
 nbSamples = 50;
 X         = linspace(0,4,nbSamples);
 w         = [0.5 25];
@@ -14,15 +19,19 @@ options.title       = 'Training data';
 if exist('h1','var') && isvalid(h1), delete(h1);end
 h1      = ml_plot_data([X(:),y(:)],options);
 
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                 2) Train BLR Model                       %%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Train Baysian Gaussian Linear regressin
-
-var         = 0.2;                   % variance in the noise of the data
+var         = 0.2;        % variance in the noise of the data
 Sigma_p     = eye(2,2);
-Xb          = [X;ones(1,nbSamples)]; % add bias
+Xb          = [X];
 yb          = y;
-[w,invA]    = train_blr(Xb,y,var,Sigma_p);
+[w,invA]    = train_blr(Xb',y',var,Sigma_p);
 
- 
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                  3) Test BLR Model                       %%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %% Prediction
 
 x_test  = [linspace(0,4,100);ones(1,100)];

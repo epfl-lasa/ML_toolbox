@@ -1,12 +1,11 @@
-%% Examples for Gradient Boosting on 1D Data
-clear all;
-close all;
-
-%% %%%%%%%%%%%%%%%%%%%
-%  Choose a Dataset
-%%%%%%%%%%%%%%%%%%%%%%
-%%  (simple example) Generate Data from sine function
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Gradient Boosting Regression 1D Example  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%               1) Load 1D Regression Datasets               %%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% (1a) (simple example) Generate Data from sine function
+clear all; close all; clc;
 nbSamples = 200;
 epsilon   = 0.1;
 x_limits  = [0, 100];
@@ -29,8 +28,8 @@ plot(X,y_true,'--k','LineWidth',2);
 legend({'data','true function'})
 
 
-%% (complex example) Generate Data from a sinc function
-
+%% (1b) (complex example) Generate Data from a sinc function
+clear all; close all; clc;
 % Set parameters for sinc function data 
 nbSamples = 200;
 epsilon   = 0.1;
@@ -57,9 +56,8 @@ plot(X,y_true,'--k','LineWidth',2);
 legend({'data','true function'})
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                     GRADIENT BOOSTING
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%                 2)  GRADIENT BOOSTING REGRESSION                     %%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Gradient Boosting with decision stumps weak learners
 % Options 
 options.nbWeakLearners = 200;

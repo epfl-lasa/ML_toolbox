@@ -1,4 +1,4 @@
-function [test_eval,train_eval] = ml_kcv(X,labels,K,f,ml_type,C)
+function [test_eval,train_eval] = ml_kcv(X,labels,K,f,ml_type,C, model_type)
 %ML_KCV K-fold Cross-Validation
 %
 %  input ------------------------------------------------------------------
@@ -44,6 +44,7 @@ N           = size(X,1);
 idx         = randperm(N);
 bin_size    = round(N/K);
 bins        = cell(1,K);
+
 
 %% Divid indices of data into K bins
 s_i = 1;
@@ -93,8 +94,7 @@ elseif strcmp(ml_type,'regression')
     train_eval.d        = zeros(1,K);    %  '8'  - coefficient of determination (d)
     train_eval.e        = zeros(1,K);    %  '9'  - coefficient of efficiency (e)
     train_eval.me       = zeros(1,K);    %  '10' - maximum absolute error
-    train_eval.mre      = zeros(1,K);    %  '11' - maximum absolute relative error
-    
+    train_eval.mre      = zeros(1,K);    %  '11' - maximum absolute relative error    
     test_eval           = train_eval;
 
 else
@@ -162,18 +162,20 @@ else    % Do proper cv on split data
             
             [train_eval,test_eval] = ml_kcv_clustering_eval(X,labels,g,train,test,k,train_eval,test_eval);
             
+            if strcmp(model_type,'svm')
+                % Model Statistics for SVM
+                train_eval.totSV(k)      = model.totalSV;
+                train_eval.ratioSV(k)    = model.totalSV/length(train);
+                train_eval.posSV(k)      = model.nSV(1)/model.totalSV;
+                train_eval.negSV(k)      = model.nSV(2)/model.totalSV;
+                train_eval.boundSV(k)    = sum(abs(model.sv_coef) == C)/model.totalSV;
+            end
+            
         elseif strcmp(ml_type,'regression')
             
             [train_eval,test_eval] = ml_kcv_regression_eval(X,labels,g,train,test,k,train_eval,test_eval);
             
-        end
-        
-        % Model Statistics for SVM
-        train_eval.totSV(k)      = model.totalSV;
-        train_eval.ratioSV(k)    = model.totalSV/length(train);
-        train_eval.posSV(k)      = model.nSV(1)/model.totalSV;
-        train_eval.negSV(k)      = model.nSV(2)/model.totalSV;
-        train_eval.boundSV(k)    = sum(abs(model.sv_coef) == C)/model.totalSV;
+        end       
         
         
     end

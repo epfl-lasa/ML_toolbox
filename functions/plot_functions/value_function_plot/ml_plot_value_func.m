@@ -93,9 +93,9 @@ end
 
 if bFigure
     title(title_name, 'Interpreter','tex','FontName','Times', 'FontWeight','Light','Interpreter','tex'); 
-    xlabel('x_1','FontName','Times', 'FontWeight','Light');
-    ylabel('x_2','FontName','Times', 'FontWeight','Light');
-    zlabel('y','FontName','Times', 'FontWeight','Light'); 
+    xlabel('$x_1$','Interpreter','Latex','FontName','Times', 'FontWeight','Light');
+    ylabel('$x_2$','Interpreter','Latex','FontName','Times', 'FontWeight','Light');
+    zlabel('y','Interpreter','Latex','FontName','Times', 'FontWeight','Light'); 
     axis tight
 end
 

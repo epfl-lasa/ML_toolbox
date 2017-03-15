@@ -161,7 +161,7 @@ box on; grid on;
 %% Set title 
 
 if plot_figure==false, 
-    title(title_name, 'Interpreter','Latex','FontName','Times', 'FontWeight','Light'); 
+    title({title_name}, 'Interpreter','tex','FontName','Times', 'FontWeight','Light'); 
 end
 
 %% Set the labels
@@ -200,11 +200,6 @@ elseif D <= 3
             end
         end        
 end
-
-
-
-
-axis equal
 
 if D ==3
     view(3)
