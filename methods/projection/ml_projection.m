@@ -61,8 +61,6 @@ switch options.method_name
         else
             [projectedData, mapping] = compute_mapping(X, 'KPCA',nbDimensions,norm_K,kernel,kpar(1),kpar(2));    
         end
-
-         % Lapalace 
         
     case {'Isomap'}
 	neighbors = options.neighbors;

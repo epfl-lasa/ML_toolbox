@@ -3,7 +3,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Bring up Drawing GUI
 clear all; close all;
-limits = [0 100 0 100];
+limits = [-50 50 -50 50];
 data = ml_generate_mouse_data(limits, 'labels');
 close;
 
