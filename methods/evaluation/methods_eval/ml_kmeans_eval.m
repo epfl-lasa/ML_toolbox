@@ -37,7 +37,7 @@ for k=1:K
     idx     = k==labels;
     rss     = rss + sum(sqrt(ml_distfunc(X(idx,:), C(k,:), dist)).^2);
 end
-  
+
 aic = ml_aic(-0.5*rss,D * K,lambda);
 bic = ml_bic(-0.5*rss,D * K,N);
 

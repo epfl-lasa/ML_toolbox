@@ -65,6 +65,7 @@ switch options.method_name
     case {'Isomap'}
 	neighbors = options.neighbors;
     [projectedData, mapping] = compute_mapping(X, options.method_name, nbDimensions, neighbors);
+
     
     case {'Laplacian'}
 	neighbors = options.neighbors;

@@ -1,4 +1,4 @@
-function [ h ] = ml_plot_rss_aic_bic(mus,stds,Ks)
+function [ h ] = ml_plot_rss_aic_bic(mus,stds,Ks, varargin)
 %ML_PLOT_RSS_AIC_BIC 
 %
 %   input -----------------------------------------------------------------
@@ -14,18 +14,44 @@ function [ h ] = ml_plot_rss_aic_bic(mus,stds,Ks)
 %       o h     : handle,      figure handle
 %
 
+plot_type = 'together';
+
+if length(varargin)>0
+    options = varargin{1};
+    plot_type = options.plot_type;
+end
+
 
 h = figure; hold on;
-errorbar(Ks,mus(1,:),stds(1,:),'--s');
-errorbar(Ks,mus(2,:),stds(2,:),'--s');
-errorbar(Ks,mus(3,:),stds(3,:),'--s');
-legend('rss','aic','bic');
+if strcmp(plot_type,'seperate')
+    subplot(1,2,1)
+    errorbar(Ks,mus(1,:),stds(1,:),'--s');
+    legend('rss');
+    set(gca,'xtick',Ks);
+    xlim([Ks(1),Ks(end)]);
+    grid on;
+    box on;
+    set(gca,'FontSize',14);
+    title('Clustering metrics', 'Interpreter','Latex');
+    xlabel('K');
+    
+    
+    subplot(1,2,2)
+    errorbar(Ks,mus(2,:),stds(2,:),'--s'); hold on;
+    errorbar(Ks,mus(3,:),stds(3,:),'--s');
+    legend('aic','bic');
+else
+    errorbar(Ks,mus(1,:),stds(1,:),'--s');
+    errorbar(Ks,mus(2,:),stds(2,:),'--s');
+    errorbar(Ks,mus(3,:),stds(3,:),'--s');
+    legend('rss','aic','bic');
+end
 set(gca,'xtick',Ks);
 xlim([Ks(1),Ks(end)]);
 grid on;
 box on;
 set(gca,'FontSize',14);
-title('Clustering metrics');
+title('Clustering metrics', 'Interpreter','Latex');
 xlabel('K');
 
 

@@ -19,11 +19,11 @@ switch options.method_name
                 
     case 'kmeans'
         
-        [labels,C,dist] = ml_kmeans_get_param(options);        
+        [labels,C,dist] = ml_kmeans_get_param(options);               
         
         if isfield(options,'lambda')
             [rss,bic,aic]  = ml_kmeans_eval(X,labels,C,dist,options.lambda);
-        else
+        else                         
             [rss,bic,aic]  = ml_kmeans_eval(X,labels,C,dist);     
         end
         

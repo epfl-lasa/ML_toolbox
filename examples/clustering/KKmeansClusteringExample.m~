@@ -20,12 +20,12 @@ axis equal
 cluster_options.method_name = 'kernel-kmeans';
 cluster_options.K           = 2;
 cluster_options.kernel      = 'gauss';
-cluster_options.kpar        = 1;
+cluster_options.kpar        = 0.5;
 
 [result1]                   = ml_clustering(X,cluster_options);
 
 % Plot decision boundary
-result1.title      = 'Kernel K ($2$)-Means on Original Data';
+result1.title      = 'Kernel K ($2$)-Means on LAP Projected Data';
 result1.plot_labels = {'$x_1$','$x_2$'};
 if exist('hd','var') && isvalid(hd), delete(hd);end
 hd = ml_plot_class_boundary(X,result1);

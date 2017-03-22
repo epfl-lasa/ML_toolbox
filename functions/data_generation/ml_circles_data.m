@@ -1,4 +1,4 @@
-function [X,labels] = ml_circles_data(num_samples,dim,num_classes)
+function [X,labels] = ml_circles_data(num_samples,dim,num_classes, varargin)
 % ML_CIRCLES_DATA Generates data which is in the patter of circles
 %
 %   input ----------------------------------------------------------------
@@ -24,9 +24,17 @@ function [X,labels] = ml_circles_data(num_samples,dim,num_classes)
 X       = [];
 labels  = [];
 
-width   = 0.5;
-spacing = 0.75;        
-noise_r = 0.1; % variance of noise for the radius
+
+if length(varargin)>0
+    width   = 2;
+    spacing = 0.15;
+    noise_r = 0.01; % variance of noise for the radius
+else
+    width   = 0.75;
+    spacing = 2;
+    noise_r = 0.5; % variance of noise for the radius
+end
+
 
 % number of data points per class
 nb_data_class = floor(num_samples/num_classes);
@@ -37,7 +45,7 @@ if dim == 2
     for c=1:num_classes
         if c == 1            
 %             r   = mvnrnd(0,0.01,nb_data_class);  
-            r   = (0.5 * width) + c * spacing + r + mvnrnd(0,noise_r,nb_data_class);      
+            r   = (0.1 * width) + c * spacing + r + mvnrnd(0,noise_r,nb_data_class);      
         else
             r   = (0.5 * width) + c * spacing + r + mvnrnd(0,noise_r,nb_data_class);      
         end

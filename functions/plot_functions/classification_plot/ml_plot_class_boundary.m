@@ -21,11 +21,14 @@ function handle = ml_plot_class_boundary(X,options)
 b_plot_boundary = true;
 dims            = [1,2];
 titlename       = '';
+plot_labels     = [];
+label_font_size = 14;
 
 if ~isfield(options,'method_name'),  error('field of method_name of structure options was not defined!'); end
-if isfield(options,'b_plot_boundary'),  b_plot_boundary = options.b_plot_boundary; end
-if isfield(options,'dims'),             dims = options.dims;                       end
-if isfield(options,'title'),            titlename = options.title;                       end
+if isfield(options,'b_plot_boundary'),   b_plot_boundary = options.b_plot_boundary; end
+if isfield(options,'dims'),              dims = options.dims;                       end
+if isfield(options,'title'),             titlename = options.title;                       end
+if isfield(options,'plot_labels'),       plot_labels = options.plot_labels;  end
 
 %% Plot figure
 handle = figure;
@@ -69,14 +72,7 @@ switch options.method_name
         if b_plot_boundary == true
             scatter(X(:,1),X(:,2),50,colors(labels,:),'o','filled','MarkerEdgeColor',[0 0 0]);
         end
-        ml_plot_centroid(centroids(:,dims),colors);
-        
-        if D == 2
-            xlabel('x'); ylabel('y')
-        end
-        if D == 3
-            xlabel('x'); ylabel('y'); zlabel('z');
-        end
+        ml_plot_centroid(centroids(:,dims),colors);       
         
     case 'kernel-kmeans'
         
@@ -87,16 +83,23 @@ switch options.method_name
         kernel     = options.kernel;
         kpar       = options.kpar;
         colors     = hsv(K);
-        [Xs,Ys]    = get_grid(X,dims,1000);
-        
-        idx        = kernelkmeans_classifier([Xs(:),Ys(:)],X,centroids(:,dims),eigens,kernel,kpar);
+        [Xs,Ys]    = get_grid(X,dims,250);
+        if strcmp(kernel,'gauss')            
+            % Gaussian Kernel
+            idx = knKmeansPredict([Xs(:),Ys(:)]', X', labels, @knGauss, kpar(1));
+       elseif strcmp(kernel,'poly')
+            % Polynomial Kernel
+            idx = knKmeansPredict([Xs(:),Ys(:)]', X', labels, @knPoly,  kpar(2), kpar(1));
+        end        
+%         idx        = kernelkmeans_classifier([Xs(:),Ys(:)],X,centroids(dims,:),eigens,kernel,kpar);
         Z          = reshape(idx,size(Xs));
         
         pcolor(Xs,Ys,Z); shading interp;
         colormap(colors);
+        alpha(0.8)
         hold on;
         if b_plot_boundary == true
-            scatter(X(:,1),X(:,2),10,colors(labels,:),'filled','MarkerEdgeColor',[0 0 0]);
+            scatter(X(:,1),X(:,2),50,colors(labels,:),'filled','MarkerEdgeColor',[0 0 0]);
         end
         
     case 'adaboost'
@@ -160,7 +163,25 @@ switch options.method_name
          
 end
 
-title(titlename);
+
+
+if isempty(plot_labels)
+    if D >= 1
+        xlabel({'$x_1$'}, 'Interpreter','Latex','FontSize',label_font_size,'FontName','Times', 'FontWeight','Light');
+    end
+    if D >= 2
+        ylabel({'$x_2$'}, 'Interpreter','Latex','FontSize',label_font_size,'FontName','Times', 'FontWeight','Light');
+    end
+else
+    if D >= 1
+        xlabel(plot_labels{1},'Interpreter','Latex', 'FontSize',label_font_size,'FontName','Times', 'FontWeight','Light');
+    end
+    if D >= 2
+        ylabel(plot_labels{2},'Interpreter','Latex','FontSize',label_font_size,'FontName','Times', 'FontWeight','Light');
+    end
+end
+
+title(titlename, 'Interpreter','Latex', 'FontSize',14);
 
 end
 

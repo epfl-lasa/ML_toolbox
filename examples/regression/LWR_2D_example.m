@@ -16,6 +16,7 @@ y       = f(X(:,1),X(:,2));
 % Plot data
 options             = [];
 options.points_size = 15;
+options.cmap        = y;
 options.plot_labels = {'$x_1$','$x_2$','y'};
 options.title       = 'Example 2D Non-linear Training Data'; 
 if exist('h1','var') && isvalid(h1), delete(h1);end

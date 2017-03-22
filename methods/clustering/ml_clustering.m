@@ -54,15 +54,37 @@ switch options.method_name
         
     case 'kernel-kmeans'
         
-       Kn                            = gram(X, X, kernel,kpar(1),kpar(2));
-       [idx,centroids,eigens]   = kernelkmeans(Kn, K);
-       
+        % Old implementation, not working properly
+%        Kn                       = gram(X, X, kernel,kpar(1),kpar(2));
+%        [idx,centroids,eigens]   = kernelkmeans(Kn, K);
+%        outputs.K               = K;
+%        outputs.method_name     = 'kernel-kmeans';
+%        outputs.labels          = idx;
+%        outputs.centroids       = centroids;
+%        outputs.eigens          = eigens;
+%        outputs.kernel          = kernel;
+%        outputs.kpar            = kpar;
+
+       % New implementation, working! But no decision boundaries or
+       % isolines .. not yet at least
+       [M, ~] = size(X);
+       init = ceil(K*rand(1,M));
+       % Using new implementation
+       if strcmp(kernel,'gauss')            
+            % Gaussian Kernel
+            [y,model,mse] = knKmeans(X',init,@knGauss, kpar(1));
+       elseif strcmp(kernel,'poly')
+            % Gaussian Kernel
+            [y,model,mse] = knKmeans(X',init,@knPoly, kpar(2), kpar(1));
+       end
        outputs.K               = K;
+       outputs.eigens          = model.eigens;
+       outputs.lambda          = diag(model.lambda);
+       outputs.centroids       = model.centroids;
        outputs.method_name     = 'kernel-kmeans';
-       outputs.labels          = idx;
-       outputs.centroids       = centroids;
-       outputs.eigens          = eigens;
+       outputs.mse             = mse;
+       outputs.labels          = y;       
        outputs.kernel          = kernel;
        outputs.kpar            = kpar;
-
+            
 end
