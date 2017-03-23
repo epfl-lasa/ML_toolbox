@@ -71,7 +71,7 @@ end
 if plot_figure == true
     handle = [];
 else
-    handle = figure;
+    handle = figure('Color',[1 1 1]);
 end
 
 % if sum(labels < 1) ~= 0 % some labels are negative
