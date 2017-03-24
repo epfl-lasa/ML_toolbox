@@ -7,7 +7,7 @@
 %% %%%% (1a) Sin/Cos Dataset %%%%%%
 clc; clear all; close all;
 dataset_type = '2d-cossine';
-[ X, y_true, y ] = ml_load_regression_datasets( dataset_type );
+[ X, y_true, y ] = ml_load_regression_datasets( dataset_type, [] );
 
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

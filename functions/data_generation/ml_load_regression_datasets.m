@@ -1,6 +1,8 @@
-function [ X, y_true, y ] = ml_load_regression_datasets( dataset_type, plot_fig )
+function [ X, y_true, y ] = ml_load_regression_datasets( dataset_type, varargin )
 
-if isempty(plot_fig)
+if length(varargin) > 0
+    plot_fig = false;
+else
     plot_fig = true;
 end
 
