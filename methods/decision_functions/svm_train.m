@@ -76,7 +76,7 @@ switch svm_type
             case 0  % gauss              
                 options = strcat({'-s 1 -t 2 -g '}, {''}, {num2str(gamma)},{' -h 0 -n '}, {''}, {num2str(nu)});     
             case 1  % poly
-                options = strcat({'-s 0 -t 1 -d '}, {''}, {num2str(degree)},{' -h 0 -r '}, {''}, {num2str(coeff)}, {' -n '},{''}, {num2str(nu)}) ;       
+                options = strcat({'-s 1 -t 1 -d '}, {''}, {num2str(degree)},{' -h 0 -r '}, {''}, {num2str(coeff)}, {' -n '},{''}, {num2str(nu)}) ;       
         end
         
 end

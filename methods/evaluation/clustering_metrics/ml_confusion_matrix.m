@@ -17,7 +17,6 @@ function M = ml_confusion_matrix(X,labels,f)
 %
 %       o M      : (num_classes x num_classes) , confusion matrix   
 %
-
 class_id    = unique(labels);
 num_classes = length(class_id);
 M           = zeros(num_classes,num_classes);
@@ -33,6 +32,17 @@ for i=1:num_classes
    end
 end
 
+% Test samples have only 1 class
+if size(M)==1
+    warning('Test samples have only 1 class!')
+    M_ = zeros(2,2);
+    if class_id ==1
+        M_(1,1) = M;
+    elseif class_id < 1
+        M_(2,2) = M;
+    end
+    M = M_;
+end
 
 end
 

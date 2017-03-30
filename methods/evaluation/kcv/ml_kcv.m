@@ -1,4 +1,4 @@
-function [test_eval,train_eval] = ml_kcv(X,labels,K,f,ml_type,C, model_type)
+function [test_eval,train_eval] = ml_kcv(X,labels,K,f,ml_type, varargin)
 %ML_KCV K-fold Cross-Validation
 %
 %  input ------------------------------------------------------------------
@@ -45,7 +45,13 @@ idx         = randperm(N);
 bin_size    = round(N/K);
 bins        = cell(1,K);
 
-
+if length(varargin) > 0
+    C = varargin{1}
+    model_type = varargin{2}
+else
+    C = 1;
+    model_type = '';
+end
 %% Divid indices of data into K bins
 s_i = 1;
 e_i = bin_size;
@@ -118,14 +124,14 @@ if K == 1 % Do grid search on data - no cv
     if strcmp(ml_type,'classification')
         
         [train_eval,test_eval] = ml_kcv_clustering_eval(X,labels,g,train,test,k,train_eval,test_eval);
-        
-        % Model Statistics for SVM
-        train_eval.totSV         = model.totalSV;
-        train_eval.ratioSV       = model.totalSV/length(train);
-        train_eval.posSV         = model.nSV(1)/model.totalSV;
-        train_eval.negSV         = model.nSV(2)/model.totalSV;
-        train_eval.boundSV       = sum(abs(model.sv_coef) == C)/model.totalSV;
-        
+        if strcmp(model_type,'svm')
+            % Model Statistics for SVM
+            train_eval.totSV         = model.totalSV;
+            train_eval.ratioSV       = model.totalSV/length(train);
+            train_eval.posSV         = model.nSV(1)/model.totalSV;
+            train_eval.negSV         = model.nSV(2)/model.totalSV;
+            train_eval.boundSV       = sum(abs(model.sv_coef) == C)/model.totalSV;
+        end
         
     elseif strcmp(ml_type,'regression')
         

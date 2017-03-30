@@ -49,7 +49,7 @@ function [train_eval,test_eval] = ml_kcv_clustering_eval(X,labels,g,train,test,k
             labelsTest = varargin{1};
             M           = ml_confusion_matrix(X(test(:),:),labelsTest(test(:)),g);
         end
-        
+       
         [A, P, R, F, FPR, TNR]   = ml_confusion_matrix_evaluation(M);
         
         test_eval.accuracy(k)    = A;

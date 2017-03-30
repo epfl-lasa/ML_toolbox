@@ -26,9 +26,15 @@ labels  = [];
 
 
 if length(varargin)>0
-    width   = 2;
-    spacing = 0.15;
-    noise_r = 0.01; % variance of noise for the radius
+    if strcmp(varargin{1},'svm')
+        width   = 2.5;
+        spacing = 0.5;
+        noise_r = 0.25; % variance of noise for the radius
+    else
+        width   = 2;
+        spacing = 0.15;
+        noise_r = 0.01; % variance of noise for the radius
+    end
 else
     width   = 0.75;
     spacing = 2;

@@ -57,7 +57,6 @@ contour(X,Y, vals, [0 0], 'LineWidth', 2, 'Color', 'k');
 
 contour(X,Y, vals, [1 1], 'LineWidth', 2, 'Color', 'r');
 % contour(X,Y, vals, [2 2], 'LineWidth', 0.5, 'Color', 'r');
-
 contour(X,Y, vals, [-1 -1], 'LineWidth', 2, 'Color', 'g');
 % contour(X,Y, vals, [-2 -2], 'LineWidth', 0.5, 'Color', 'g');
 
@@ -89,16 +88,16 @@ switch svm_type
     case 0
             switch kernel_type
                 case 0 
-                    title(sprintf('C = %d, \\sigma = %g, SV = %d, Acc = %g', svm_options.C, svm_options.sigma, N_SVs, accuracy), 'FontSize', 14);        
+                    title(sprintf('C = %4.2f, \\sigma = %g, SV = %d, Acc = %3.3f', svm_options.C, svm_options.sigma, N_SVs, accuracy), 'Interpreter','tex','FontSize', 20, 'FontWeight', 'Normal', 'FontName', 'Times');        
                 case 1
-                    title(sprintf('C = %d, degree = %d, coeff =%d, SV = %d, Acc = %g', svm_options.C, svm_options.degree, svm_options.coeff, N_SVs, accuracy), 'FontSize', 14);        
+                    title(sprintf('C = %4.2f, degree = %d, coeff =%d, SV = %d, Acc = %3.3f', svm_options.C, svm_options.degree, svm_options.coeff, N_SVs, accuracy), 'Interpreter','LaTex','FontSize', 20);        
             end
     case 1         
             switch kernel_type
                 case 0
-                    title(sprintf('\\nu = %g, \\sigma = %g, SV = %d, Acc = %g', svm_options.nu, svm_options.sigma, N_SVs, accuracy), 'FontSize', 14);
+                    title(sprintf('\\nu = %4.3f, \\sigma = %g, SV = %d, Acc = %3.3f', svm_options.nu, svm_options.sigma, N_SVs, accuracy), 'Interpreter','tex','FontSize', 20, 'FontWeight', 'Normal', 'FontName', 'Times');
                 case 1
-                    title(sprintf('\\nu = %g, degree = %d, coeff =%d, SV = %d, Acc = %g', svm_options.nu, svm_options.degree, svm_options.coeff, N_SVs, accuracy), 'FontSize', 14);
+                    title(sprintf('\\nu = %4.3f, degree = %d, coeff =%d, SV = %d, Acc = %1.3f', svm_options.nu, svm_options.degree, svm_options.coeff, N_SVs, accuracy),'Interpreter','tex','FontSize', 20, 'FontWeight', 'Normal', 'FontName', 'Times');
             end
 
 end
