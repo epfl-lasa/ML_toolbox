@@ -69,7 +69,7 @@ contour(grid1,grid2,reshape(y_grid,size(grid1)),[0.25 0.25],'-', 'LineWidth',0.5
 scatter(RVs(:,1),RVs(:,2),70,'o','MarkerEdgeColor', [1 1 1], 'LineWidth', 2);       
 legend(legend_names,'Location','NorthWest')
 hold off
-title(sprintf('RVM \\sigma = %g, RV = %d, Acc = %g', width, N_RVs, acc), 'FontSize', 14);     
+title(sprintf('RVM \\sigma = %g, RV = %d, Acc = %g', width, N_RVs, acc), 'Interpreter','tex','FontSize', 20, 'FontWeight', 'Normal');     
 
 axis equal
 grid on
