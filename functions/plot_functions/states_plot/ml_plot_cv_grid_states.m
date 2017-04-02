@@ -279,7 +279,7 @@ else
         handle = figure('Color', [1 1 1]);
    
         x_index = options.param_ranges;
-        subplot(1,2,1)
+        subplot(1,2,1)        
         errorbar(x_index,stats.test.acc.mean,stats.test.acc.std,'-rs'); hold on;
         errorbar(x_index,stats.train.acc.mean,stats.train.acc.std,'-gs');
         
@@ -295,7 +295,7 @@ else
         end
         
         
-        ylim([min(stats.test.acc.mean)*3/4 max(stats.test.acc.mean)*1.1])
+        ylim([min(stats.test.acc.mean)*3/4 max(stats.train.acc.mean)*1.1])
         legend({'Test','Train'},'FontSize',14);       
         title(title_name,'FontSize',14, 'FontWeight','Normal');
         axis square
@@ -318,7 +318,7 @@ else
             set(gca,'XTickLabel', cellstr(num2str(x_range(:), '%4.2f')))
         end
         
-        ylim([min(stats.test.fmeasure.mean)*3/4 max(stats.test.fmeasure.mean)*1.1])
+        ylim([min(stats.test.fmeasure.mean)*3/4 max(stats.train.fmeasure.mean)*1.1])
         legend({'Test','Train'},'FontSize',14);       
         title(title_name,'FontSize',14, 'FontWeight','Normal');
         axis square

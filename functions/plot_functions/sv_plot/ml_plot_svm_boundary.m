@@ -102,7 +102,7 @@ switch svm_type
 
 end
 
-axis equal
+axis tight
 grid on
 box on
 

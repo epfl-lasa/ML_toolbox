@@ -71,7 +71,7 @@ legend(legend_names,'Location','NorthWest')
 hold off
 title(sprintf('RVM \\sigma = %g, RV = %d, Acc = %g', width, N_RVs, acc), 'Interpreter','tex','FontSize', 20, 'FontWeight', 'Normal');     
 
-axis equal
+axis tight
 grid on
 box on
 

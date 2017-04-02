@@ -1,4 +1,4 @@
-function [test_eval,train_eval] = ml_kcv(X,labels,K,f,ml_type, varargin)
+function [test_eval,train_eval] = ml_kcv(X,labels,K,f, ml_type, varargin)
 %ML_KCV K-fold Cross-Validation
 %
 %  input ------------------------------------------------------------------
