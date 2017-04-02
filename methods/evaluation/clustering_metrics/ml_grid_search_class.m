@@ -87,12 +87,7 @@ for i=1:length(range_p1)
                 fprintf('Evaluating Param $\nu$: %f ', options.nu);
                 f = @(X,labels,model)svm_classifier(X, labels, options, model);                
                 [test_eval,train_eval] = ml_kcv(X,labels,options.K,f,'classification');
-        end       
-        
-
-       
-        
-
+        end                         
         
         ctest{i,j}  = test_eval;
         ctrain{i,j} = train_eval;

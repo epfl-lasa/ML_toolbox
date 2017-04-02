@@ -44,7 +44,7 @@ ml_plot_data(X(:,dims),options_plot_data);
 if plot_figure == true
    colorbar;
    set(0,'defaulttextinterpreter','latex');
-   title(['$C(\mathbf{x})$  with  '  num2str(length(model)) ' $h(\mathbf{x})$'],'FontSize',16); 
+   title(['$C(\mathbf{x})$  with  '  num2str(length(model)) ' $\phi(\mathbf{x})$'],'FontSize',16); 
    xlabel(['$x_' num2str(dims(1)) '$'],'FontSize',22);
    ylabel(['$x_' num2str(dims(2)) '$'],'FontSize',22); 
 end

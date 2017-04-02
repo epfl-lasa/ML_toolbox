@@ -46,8 +46,8 @@ bin_size    = round(N/K);
 bins        = cell(1,K);
 
 if length(varargin) > 0
-    C = varargin{1}
-    model_type = varargin{2}
+    C = varargin{1};
+    model_type = varargin{2};
 else
     C = 1;
     model_type = '';
@@ -122,9 +122,15 @@ if K == 1 % Do grid search on data - no cv
     g           = @(X)f(X,[],model);
     
     if strcmp(ml_type,'classification')
+
+        if strcmp(model_type,'rvm')
+            % Check binary labels are correct
+            labels(find(labels==-1)) = 0;           
+        end       
         
-        [train_eval,test_eval] = ml_kcv_clustering_eval(X,labels,g,train,test,k,train_eval,test_eval);
-        if strcmp(model_type,'svm')
+       [train_eval,test_eval] = ml_kcv_clustering_eval(X,labels,g,train,test,k,train_eval,test_eval);        
+       
+       if strcmp(model_type,'svm')
             % Model Statistics for SVM
             train_eval.totSV         = model.totalSV;
             train_eval.ratioSV       = model.totalSV/length(train);
@@ -132,6 +138,8 @@ if K == 1 % Do grid search on data - no cv
             train_eval.negSV         = model.nSV(2)/model.totalSV;
             train_eval.boundSV       = sum(abs(model.sv_coef) == C)/model.totalSV;
         end
+        
+
         
     elseif strcmp(ml_type,'regression')
         
@@ -160,29 +168,36 @@ else    % Do proper cv on split data
         
         % Train the classifier
         [~,model]    = f(X(train(:),:),labels(train(:)),[]);
-        
-        % g is the trained classifier
-        g           = @(X)f(X,[],model);
-        
-        if strcmp(ml_type,'classification')
+        if isempty (model)
+            warning('Something went wrong, skipping this fold!')
+        else
+            % g is the trained classifier
+            g           = @(X)f(X,[],model);
             
-            [train_eval,test_eval] = ml_kcv_clustering_eval(X,labels,g,train,test,k,train_eval,test_eval);
-            
-            if strcmp(model_type,'svm')
-                % Model Statistics for SVM
-                train_eval.totSV(k)      = model.totalSV;
-                train_eval.ratioSV(k)    = model.totalSV/length(train);
-                train_eval.posSV(k)      = model.nSV(1)/model.totalSV;
-                train_eval.negSV(k)      = model.nSV(2)/model.totalSV;
-                train_eval.boundSV(k)    = sum(abs(model.sv_coef) == C)/model.totalSV;
+            if strcmp(ml_type,'classification')
+                
+                if strcmp(model_type,'rvm')
+                    % Check binary labels are correct
+                    labels(find(labels==-1)) = 0;
+                end
+                
+                [train_eval,test_eval] = ml_kcv_clustering_eval(X,labels,g,train,test,k,train_eval,test_eval);
+                
+                if strcmp(model_type,'svm')
+                    % Model Statistics for SVM
+                    train_eval.totSV(k)      = model.totalSV;
+                    train_eval.ratioSV(k)    = model.totalSV/length(train);
+                    train_eval.posSV(k)      = model.nSV(1)/model.totalSV;
+                    train_eval.negSV(k)      = model.nSV(2)/model.totalSV;
+                    train_eval.boundSV(k)    = sum(abs(model.sv_coef) == C)/model.totalSV;
+                end
+                
+            elseif strcmp(ml_type,'regression')
+                
+                [train_eval,test_eval] = ml_kcv_regression_eval(X,labels,g,train,test,k,train_eval,test_eval);
+                
             end
-            
-        elseif strcmp(ml_type,'regression')
-            
-            [train_eval,test_eval] = ml_kcv_regression_eval(X,labels,g,train,test,k,train_eval,test_eval);
-            
-        end       
-        
+        end
         
     end
     

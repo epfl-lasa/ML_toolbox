@@ -23,13 +23,13 @@ if ~isfield(options,'log_grid'),options.log_grid = 0'; end
 if ~isfield(options,'svm_metrics'),options.svm_metrics = 0'; end
 
 title_name = options.title;
-handle = figure('Color', [1 1 1],  'Position', [0, 1000, 1295, 455]);
-hold on;
+
 
 [P, N] = size(stats.train.acc.mean');
 
 if P > 1 && N > 1
-           
+        handle = figure('Color', [1 1 1],  'Position', [0, 1000, 1295, 455]);
+        hold on;
         colormap hot; 
         x = options.param_ranges(2,:);
         y = options.param_ranges(1,:);
@@ -276,19 +276,55 @@ if P > 1 && N > 1
         
                
 else
-    
-        x_index = 1:1:length(stats.test.acc.mean);
+        handle = figure('Color', [1 1 1]);
+   
+        x_index = options.param_ranges;
+        subplot(1,2,1)
+        errorbar(x_index,stats.test.acc.mean,stats.test.acc.std,'-rs'); hold on;
+        errorbar(x_index,stats.train.acc.mean,stats.train.acc.std,'-gs');
         
-        h1 = errorbar(x_index,stats.test.acc.mean,stats.test.acc.std,'-rs');
-        h2 = errorbar(x_index,stats.train.acc.mean,stats.train.acc.std,'-gs');
+        xlabel(options.param_names, 'FontSize',14, 'FontWeight','Normal');
+        ylabel('Accuracy','FontSize',14);
+        xlim([x_index(1) x_index(end)])
         
-        xlabel('Models','FontSize',14);
-        ylabel('Evaluation metric','FontSize',14);
-        hl = legend([h1,h2],'Test ACC','Train ACC');
-        set(hl,'Location','SouthEast');
-        title(title_name,'FontSize',16);
+        if (options.log_grid ==1)
+                set(gca,'xscale','log')
+                x_range = options.param_ranges;
+                set(gca, 'XTick', options.param_ranges)
+                set(gca,'XTickLabel', cellstr(num2str(x_range(:), '%4.2f')))
+        end
+        
+        
+        ylim([min(stats.test.acc.mean)*3/4 max(stats.test.acc.mean)*1.1])
+        legend({'Test','Train'},'FontSize',14);       
+        title(title_name,'FontSize',14, 'FontWeight','Normal');
+        axis square
         box on; 
         grid on;
+        
+        
+        subplot(1,2,2)
+        
+        errorbar(x_index,stats.test.fmeasure.mean,stats.test.fmeasure.std,'-rs'); hold on;
+        errorbar(x_index,stats.train.fmeasure.mean,stats.train.fmeasure.std,'-gs');
+        
+        xlabel(options.param_names, 'FontSize',14, 'FontWeight','Normal');
+        ylabel('F-Measure','FontSize',14);
+        xlim([x_index(1) x_index(end)])
+        if (options.log_grid ==1)
+            set(gca,'xscale','log')
+            x_range = options.param_ranges;
+            set(gca, 'XTick', options.param_ranges)
+            set(gca,'XTickLabel', cellstr(num2str(x_range(:), '%4.2f')))
+        end
+        
+        ylim([min(stats.test.fmeasure.mean)*3/4 max(stats.test.fmeasure.mean)*1.1])
+        legend({'Test','Train'},'FontSize',14);       
+        title(title_name,'FontSize',14, 'FontWeight','Normal');
+        axis square
+        box on; 
+        grid on;
+
 
 end
 
