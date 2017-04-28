@@ -24,7 +24,7 @@ est_eps = sqrt(1/model.beta);
 options             = [];
 options.labels      = [];
 options.points_size = 10;
-options.title       = sprintf('RVR + RBF Kernel: \\sigma = %g, RV = %d, \\epsilon_{est}= %g', sigma, N_RVs, est_eps); 
+options.title       = sprintf('RVR + RBF Kernel: $\\sigma$ = %g, RV = %d, $\\epsilon_{est}$= %g', sigma, N_RVs, est_eps); 
 
 % Compute predicted regression function (using train data)
 [y_rvm, model] = rvm_regressor(X, randn(length(X),1), rvr_options, model);

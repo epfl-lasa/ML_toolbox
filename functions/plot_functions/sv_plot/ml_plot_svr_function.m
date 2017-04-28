@@ -17,20 +17,20 @@ switch svr_options.svr_type
     case 0   % epsilon-SVR     
         switch svr_options.kernel_type
             case 0
-                title_string = sprintf('\\epsilon-SVR + linear kernel: \\epsilon = %g, C =%d, SV = %d', svr_options.epsilon, svr_options.C, model.totalSV);
+                title_string = sprintf('$\\epsilon$-SVR + linear kernel: $\\epsilon$ = %g, C =%d, SV = %d', svr_options.epsilon, svr_options.C, model.totalSV);
             case 1
-                title_string = sprintf('\\epsilon-SVR + poly kernel: \\epsilon = %g, degree = %d, coeff = %d, C =%d, SV = %d', svr_options.epsilon, svr_options.degree, svr_options.coeff, svr_options.C, model.totalSV);
+                title_string = sprintf('$\\epsilon$-SVR + poly kernel: $\\epsilon$ = %g, degree = %d, coeff = %d, C =%d, SV = %d', svr_options.epsilon, svr_options.degree, svr_options.coeff, svr_options.C, model.totalSV);
             case 2
-                title_string = sprintf('\\epsilon-SVR + RBF kernel: \\epsilon = %g, \\sigma = %g, C =%d, SV = %d', svr_options.epsilon, svr_options.sigma, svr_options.C, model.totalSV);
+                title_string = sprintf('$\\epsilon$-SVR + RBF kernel: $\\epsilon$ = %g, $\\sigma$ = %g, C =%d, SV = %d', svr_options.epsilon, svr_options.sigma, svr_options.C, model.totalSV);
         end
     case 1 % nu-SVR
         switch svr_options.kernel_type
             case 0
-                title_string = sprintf('\\nu-SVR + linear kernel: \\nu =%g, C = %d, SV = %d, \\epsilon = %g', svr_options.nu, svr_options.C, model.totalSV, svr_options.epsilon);
+                title_string = sprintf('$\\nu$-SVR + linear kernel: $\\nu$ =%g, C = %d, SV = %d, $\\epsilon$ = %g', svr_options.nu, svr_options.C, model.totalSV, svr_options.epsilon);
             case 1
-                title_string = sprintf('\\nu-SVR + poly kernel: \\nu =%g, degree = %d, coeff = %d, C = %d, SV = %d, \\hat{\epsilon} = %g', svr_options.nu, svr_options.degree, svr_options.coeff, svr_options.C, model.totalSV, svr_options.epsilon);
+                title_string = sprintf('$\\nu$-SVR + poly kernel: $\\nu$ =%g, degree = %d, coeff = %d, C = %d, SV = %d, $\\hat{\epsilon}$ = %g', svr_options.nu, svr_options.degree, svr_options.coeff, svr_options.C, model.totalSV, svr_options.epsilon);
             case 2
-                title_string = sprintf('\\nu-SVR + RBF kernel: \\nu =%g, \\sigma = %g, C = %d, SV = %d, \\epsilon_{est} = %g', svr_options.nu, svr_options.sigma, svr_options.C, model.totalSV, svr_options.epsilon);
+                title_string = sprintf('$\\nu$-SVR + RBF kernel: $\\nu$ =%g, $\\sigma$ = %g, C = %d, SV = %d, $\\epsilon_{est}$ = %g', svr_options.nu, svr_options.sigma, svr_options.C, model.totalSV, svr_options.epsilon);
         end
 end
 
