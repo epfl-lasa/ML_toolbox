@@ -132,11 +132,8 @@ else
         m = 2; n = 3; 
     elseif num_eigs == 6
         m = 2; n = 3;
-    elseif num_eigs > 7 
-        num_eigs        
+    elseif num_eigs >= 7        
         m = floor(sqrt(num_eigs)); n = ceil(num_eigs/m);
-        m
-        n
     end
     
     set(gca, 'LooseInset', get(gca,'TightInset'))
