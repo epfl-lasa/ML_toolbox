@@ -176,11 +176,7 @@ if P > 1 && N > 1
             x = options.param_ranges(2,:);
             y = options.param_ranges(1,:);
             
-            if (options.svm_metrics == 1)
-                subplot(2, 2, 1)
-            else
-                subplot(1, 2, 1)
-            end
+            subplot(2, 2, 1)
             z = stats.test.acc.mean;
             contourf(x,y,z)
             if (options.log_grid ==1)
@@ -201,11 +197,8 @@ if P > 1 && N > 1
             grid off
             axis square
             
-            if (options.svm_metrics == 1)
-                subplot(2, 2, 1)
-            else
-                subplot(1, 2, 2)
-            end
+
+            subplot(2, 2, 2)
             z = stats.test.fmeasure.mean;
             contourf(x,y,z)
             if (options.log_grid ==1)
@@ -227,8 +220,7 @@ if P > 1 && N > 1
             grid off
             axis square
             
-            
-            if (options.svm_metrics == 1)
+
                 subplot(2, 2, 3)
                 z = stats.test.fpr.mean;
                 contourf(x,y,z)
@@ -271,7 +263,6 @@ if P > 1 && N > 1
                 colorbar
                 grid off
                 axis square
-            end
         end
         
                
