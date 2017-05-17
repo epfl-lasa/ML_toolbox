@@ -6,7 +6,7 @@
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Generate Data
 clear all; close all; clc;
-nbSamples   = 100;
+nbSamples   = 200;
 epsilon     = 0.2;
 X           = linspace(0,50,nbSamples);
 y           = sin(X*0.2) + normrnd(0,0.2,1,nbSamples);
@@ -37,14 +37,11 @@ h1      = ml_plot_data([X(:),y(:)],options);
 model.X_train   = X;
 model.y_train   = y;
 X_test          = linspace(0,50,200)';
-rbf_var         = 5;
+rbf_var         = 0.1;
+epsilon         = 0.1;
 gp_f            = @(X)ml_gpr(X,[],model,epsilon,rbf_var);
 
-
-%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%           3) Test GPR Model on Train points                %%
-%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Plot GPR
+% Plot GPR
 options             = [];
 options.points_size = 10;
 options.title       = 'GPR'; 
@@ -56,11 +53,12 @@ hold on;
 
 options = [];
 options.bFigure = false;
+options.num_samples = 100;
 gp_plot(X,gp_f,1,options);
 
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%           4) Grid Search for GPR with RBF Kernel           %%
+%%           3) Grid Search for GPR with RBF Kernel           %%
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% K-fold cross validation 
 
