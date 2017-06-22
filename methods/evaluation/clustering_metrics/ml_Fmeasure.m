@@ -63,11 +63,10 @@ for i = 1:nbOfClasses
 end
 
 for m = 1:nbOfClasses
-    sizeClasses(m,:) = length(find(class_labels==m));
+    sizeClasses(m,:) = length(find(class_labels==unique_class_labels(m)));
 end
 
-F = sum(max(Fm,[],2).*sizeClasses)
-F = sum(max(Fm,[],2).*sizeClasses)/sum(sizeClasses)
+F = sum(max(Fm,[],2).*sizeClasses)/sum(sizeClasses);
 
 end
 
