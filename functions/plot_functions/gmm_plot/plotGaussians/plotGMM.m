@@ -1,4 +1,4 @@
-function plotGMM(Mu, Sigma, color, display_mode);
+function plotGMM(Mu, Sigma, color, display_mode, varargin);
 %
 % This function plots a representation of the components (means and 
 % covariance amtrices) of a Gaussian Mixture Model (GMM) or a
@@ -17,9 +17,14 @@ function plotGMM(Mu, Sigma, color, display_mode);
 %                   1D representation).
 
 nbData = size(Mu,2);
-lightcolor = color + [0.6,0.6,0.6];
-lightcolor(find(lightcolor>1.0)) = 1.0;
 
+if isempty(varargin)    
+    lightcolor = color + [0.6,0.6,0.6];
+    lightcolor(find(lightcolor>1.0)) = 1.0;
+else
+    lightcolor = color + [0.1,0.1,0.1];
+    lightcolor(find(lightcolor>1.0)) = 1.0;
+end
 if display_mode==1
   nbDrawingSeg = 40;
   t = linspace(-pi, pi, nbDrawingSeg)';

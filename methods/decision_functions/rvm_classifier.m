@@ -41,7 +41,7 @@ if (model_exists==1)
     errs	= sum(y_rvm(labels==0)>0) + sum(y_rvm(labels==1)<=0);
     acc     = 1 - errs/N;
     N_RVs   = length(model.RVs);
-    SB1_Diagnostic(1,'RVM CLASSIFICATION \n Accuracy =  %.2f%%\n Revelant Vectors = %d \n', acc, N_RVs);
+    SB1_Diagnostic(1,'RVM CLASSIFICATION \n Accuracy =  %2.4f\n Revelant Vectors = %d \n', acc, N_RVs);
     
     model.N_RVs            = N_RVs;
     model.rvm_options      = rvm_options;

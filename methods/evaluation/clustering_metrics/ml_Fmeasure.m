@@ -25,31 +25,49 @@ function F = ml_Fmeasure(cluster_labels, class_labels)
 
 
 nbOfClusters = length(unique(cluster_labels));
-nbOfClasses = length(unique(class_labels));
-sizeClasses = zeros(nbOfClasses,1);
+nbOfClasses  = length(unique(class_labels));
+sizeClasses  = zeros(nbOfClasses,1);
 
 Fm = zeros(nbOfClasses,nbOfClusters);
+
+unique_cluster_labels = unique(cluster_labels);
+unique_class_labels   = unique(class_labels);
+
+% for i = 1:nbOfClasses
+%     for j = 1:nbOfClusters
+%         N=0;
+%         for k = 1:length(cluster_labels)
+%             if(cluster_labels(k) == j && class_labels(k) == i)
+%                 N = N+1;
+%             end
+%         end
+%         Precision = N/length(find(cluster_labels==j));
+%         Recall = N/length(find(class_labels==i));
+%         Fm(i,j) = 2*Precision*Recall/(Precision+Recall);
+%     end
+% end
+
 
 for i = 1:nbOfClasses
     for j = 1:nbOfClusters
         N=0;
         for k = 1:length(cluster_labels)
-            if(cluster_labels(k) == j && class_labels(k) == i)
+            if(cluster_labels(k) == unique_cluster_labels(j) && class_labels(k) == unique_class_labels(i))
                 N = N+1;
             end
         end
-        Precision = N/length(find(cluster_labels==j));
-        Recall = N/length(find(class_labels==i));
+        Precision = N/length(find(cluster_labels==unique_cluster_labels(j)));
+        Recall = N/length(find(class_labels==unique_class_labels(i)));
         Fm(i,j) = 2*Precision*Recall/(Precision+Recall);
     end
 end
-
 
 for m = 1:nbOfClasses
     sizeClasses(m,:) = length(find(class_labels==m));
 end
 
-F = sum(max(Fm,[],2).*sizeClasses)/sum(sizeClasses);
+F = sum(max(Fm,[],2).*sizeClasses)
+F = sum(max(Fm,[],2).*sizeClasses)/sum(sizeClasses)
 
 end
 
