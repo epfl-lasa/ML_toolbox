@@ -10,7 +10,7 @@ Go to the ```./examples``` folder to run some simple demos and examples from eac
 For access to the ```tutorials-spring-2016``` contact the current maintainer.
 
 ##### Non-linear Dimensionality Reduction
-Topics covered: kernel Princical Component Analysis (kPCA), Laplacian Eigenmaps, Isomaps.
+Topics covered: kernel Principal Component Analysis (kPCA), Laplacian Eigenmaps, Isomaps.
 
 <p align="center">
 <img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/kernelPCA.png" width="290"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/2D_circle.png" width="290"><img src="https://github.com/epfl-lasa/ML_toolbox/blob/master/img/2D_circle_proj_lap.png" width="290">
