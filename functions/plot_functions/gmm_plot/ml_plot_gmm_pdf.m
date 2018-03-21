@@ -22,6 +22,7 @@ end
 figure;
 % contour(X_,Y_, vals, 50, 'LineStyle', 'none');hold on;
 contour(X_,Y_, vals, 100);hold on;
+% surf(X_,Y_, vals, 100);hold on;
 colormap jet
 colorbar
 colors = hsv(K);

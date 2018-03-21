@@ -1,4 +1,4 @@
-function handle = ml_plot_gmm_contour(haxes,Priors,Mu,Sigma,color,STD,handle)
+function handle = plot_gmm_contour(haxes,Priors,Mu,Sigma,color,STD,handle)
 %PLOT_GMM_CONTOUR Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -18,25 +18,25 @@ if ~exist('handle','var')
     handle = zeros(1,K);
     for k=1:K
         l = max(Priors);
-        for i=1:(-1):STD
+        for i=3:(-1):STD
             w = Priors(k)/l;
             handle(k) = plot_gaussian_ellipsoid(Mu(:,k),Sigma(:,:,k),i,npts,haxes,w,color(k,:));
-%             set(handle(k),'LineWidth',2);
-%              text(Mu(1,k),Mu(2,k),num2str(k),'FontWeight','bold','FontSize',24,'Color',color,'VerticalAlignment','middle','HorizontalAlignment','center');
+            %set(handle(k),'LineWidth',2);
+            %  text(Mu(1,k),Mu(2,k),num2str(k),'FontWeight','bold','FontSize',24,'Color',color,'VerticalAlignment','middle','HorizontalAlignment','center');
         end
     end 
 else
     
     for k=1:size(handle,2)
         l = max(Priors);
-%         for i=3:(-1):STD
+        %for i=3:(-1):STD
              w = Priors(k)/l;
             bp = get_elipsoid_data(Mu(:,k),Sigma(:,:,k),3,npts);
             
             zd = get(handle(k),'ZData');
             cd = get(handle(k),'CData');
             set(handle(k),'XData',[bp(1,:) NaN]','YData',[bp(2,:) NaN]','ZData',zd,'CData',cd);
-%        end
+       % end
     end
     
 end

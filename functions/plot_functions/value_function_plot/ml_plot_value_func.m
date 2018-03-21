@@ -39,28 +39,21 @@ if isfield(options,'surf_type'),    surf_type    = options.surf_type;   end
 if isfield(options,'regr_type'),    regr_type    = options.regr_type;   end
 
 %% Get boundary of original data.
-
-
-
 X = X(:,dims);
-
 min_x = min(X(:,1));
 max_x = max(X(:,1));
-
 min_y = min(X(:,2));
 max_y = max(X(:,2));
-
 [X,Y]  = meshgrid(linspace(min_x,max_x,num_samples),linspace(min_y,max_y,num_samples));
 
 %% Evaluate f
 
 switch regr_type
-    case 'LR';
+    case 'LR'
         Data = [X(:),Y(:)];        
     case 'GMR'    
         Data = [X(:),Y(:)]';        
 end
-
 z      = f(Data);
 
 %% Plot
@@ -92,10 +85,10 @@ end
 %% Plot attributes, name, lables, scaling, etc...
 
 if bFigure
-    title(title_name, 'Interpreter','tex','FontName','Times', 'FontWeight','Light','Interpreter','tex'); 
-    xlabel('$x_1$','Interpreter','Latex','FontName','Times', 'FontWeight','Light');
-    ylabel('$x_2$','Interpreter','Latex','FontName','Times', 'FontWeight','Light');
-    zlabel('y','Interpreter','Latex','FontName','Times', 'FontWeight','Light'); 
+    title(title_name, 'Interpreter','Tex','FontName','Times', 'FontWeight','Light','FontSize',15); 
+    xlabel('$\xi_x$','Interpreter','LaTex','FontName','Times', 'FontWeight','Light','FontSize',15);
+    ylabel('$\xi_y$','Interpreter','LaTex','FontName','Times', 'FontWeight','Light','FontSize',15);
+    zlabel('$\kappa$','Interpreter','LaTex','FontName','Times', 'FontWeight','Light', 'FontSize',15); 
     axis tight
 end
 

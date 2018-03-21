@@ -1,4 +1,4 @@
-function plotGMM(Mu, Sigma, color, display_mode, varargin);
+function plotGMM(Mu, Sigma, color, display_mode);
 %
 % This function plots a representation of the components (means and 
 % covariance amtrices) of a Gaussian Mixture Model (GMM) or a
@@ -17,14 +17,8 @@ function plotGMM(Mu, Sigma, color, display_mode, varargin);
 %                   1D representation).
 
 nbData = size(Mu,2);
-
-if isempty(varargin)    
-    lightcolor = color + [0.6,0.6,0.6];
-    lightcolor(find(lightcolor>1.0)) = 1.0;
-else
-    lightcolor = color + [0.1,0.1,0.1];
-    lightcolor(find(lightcolor>1.0)) = 1.0;
-end
+lightcolor = color + [0.6,0.6,0.6];
+lightcolor(find(lightcolor>1.0)) = 1.0;
 
 if display_mode==1
   nbDrawingSeg = 40;
@@ -32,15 +26,14 @@ if display_mode==1
   for j=1:nbData
     stdev = sqrtm(3.0.*Sigma(:,:,j));
     X = [cos(t) sin(t)] * real(stdev) + repmat(Mu(:,j)',nbDrawingSeg,1);
-    
+    patch(X(:,1), X(:,2), lightcolor, 'lineWidth', 2, 'EdgeColor', color);
     plot(Mu(1,:), Mu(2,:), 'x', 'lineWidth', 2, 'color', color);
-    patch(X(:,1), X(:,2), lightcolor, 'lineWidth', 2, 'EdgeColor', color); 
   end
 elseif display_mode==2
   nbDrawingSeg = 40;
   t = linspace(-pi, pi, nbDrawingSeg)';
   for j=1:nbData
-    stdev = 2*sqrtm(3.0.*Sigma(:,:,j));
+    stdev = sqrtm(3.0.*Sigma(:,:,j));
     X = [cos(t) sin(t)] * real(stdev) + repmat(Mu(:,j)',nbDrawingSeg,1);
     patch(X(:,1), X(:,2), lightcolor, 'LineStyle', 'none');
   end

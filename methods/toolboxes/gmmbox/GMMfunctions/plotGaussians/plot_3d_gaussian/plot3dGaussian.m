@@ -1,17 +1,15 @@
 function handles = plot3dGaussian(Priors, Mus,Sigmas )
-% 
+
 
 K = size(Mus,2);
 npts = 50; 
 
 handles = zeros(K,1);
-% weights = Priors;
-weights = 1/length(Priors)*ones(length(Priors));
 
-% weights = rescale(Priors,min(Priors),max(Priors),0.01,0.8);
+weights = rescale(Priors,min(Priors),max(Priors),0.01,0.8);
 
-% weights(isnan(weights)==1) = 0.8;
-K_colors = hsv(K);
+weights(isnan(weights)==1) = 0.8;
+
 for k = 1:K    
     [x,y,z] = sphere(npts);
     ap = [x(:) y(:) z(:)]';
@@ -20,11 +18,6 @@ for k = 1:K
         fprintf('warning: negative eigenvalues\n');
         d = max(d,0);
     end
-    
-    if eig(Sigmas(:,:,k)) < 1e-3
-        d = d*100;
-    end
-    
     d =  sqrt(d); % convert variance to sdwidth*sd
     bp = (v*d*ap) + repmat(Mus(:,k), 1, size(ap,2));
     xp = reshape(bp(1,:), size(x));
@@ -33,14 +26,15 @@ for k = 1:K
     handles(k) = surf(xp,yp,zp);
 
     
-%     [~,D] = eig(Sigmas(:,:,k));
-%     eigV = sqrt(diag(D))
-%     [x, y, z] = ellipsoid(Mus(1,k),Mus(2,k),Mus(3,k),eigV(1,1),eigV(2,1),eigV(3,1),30);
+%     %[~,D] = eig(Sigmas(:,:,k));
+%     %eigV = sqrt(diag(D))
+%     %[x, y, z] = ellipsoid(Mus(1,k),Mus(2,k),Mus(3,k),eigV(1,1),eigV(2,1),eigV(3,1),30);
 
+    
     scatter3(Mus(1,k),Mus(2,k),Mus(3,k),2,'filled','ko');
-%     sh = surfl(xp, yp, zp);
-    alpha 0.05
-%     set(sh,'FaceColor',K_colors(k,:),'EdgeColor','none')
+    sh = surfl(xp, yp, zp);
+    set(sh,'FaceColor',[0.5,0.5,0.5],'FaceAlpha',weights(k),'EdgeColor','none')
+
 
 
 end

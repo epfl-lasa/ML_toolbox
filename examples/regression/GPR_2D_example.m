@@ -82,7 +82,6 @@ if exist('h2','var') && isvalid(h2), delete(h2);end
 h2 = gp_plot(model.X_train,gp_f,dims,options);
 colorbar
 
-
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%           4) Grid Search for GPR with RBF Kernel           %%
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -8,7 +8,7 @@ function [X,labels,gmm] = ml_clusters_data(num_samples,dim,num_classes)
 %
 %       o dim         : (1 x 1), dimension of the data. [2 or 3]
 %
-%       o num_classes : (1 x 1), number of classes.
+%       o num_classes : (1 x 1), number of classes. if vector
 %   output ----------------------------------------------------------------
 %
 %       o X          : (num_samples x D), number of samples.
@@ -31,8 +31,20 @@ Sigma               = zeros(dim,dim,K);
 
 
 % number of data points per class
-nb_data_class       = floor(num_samples/num_classes);
+nb_data_per_class = zeros(1,num_classes);
+if length(num_samples) == 1    
+    for n=1:num_classes
+        nb_data_per_class(n) = floor(num_samples/num_classes);
+    end
+    if sum(nb_data_per_class) ~= num_samples
+        c_index = randi(3);
+        nb_data_per_class(c_index) = nb_data_per_class(c_index) + (num_samples-sum(nb_data_per_class));
+    end
+else 
+    nb_data_per_class    = num_samples;
+end
 
+nb_data_per_class
 % sampling volume range
 a =  - num_classes * min_dist_clusters;
 b =    num_classes * min_dist_clusters;
@@ -80,16 +92,14 @@ end
 X      = [];
 labels = [];
 
-% for k=1:K
-%     
-%     X       = [X;  gmm_sample(nb_data_class,1,Mu(:,k),Sigma(:,:,k))'   ];
-%     labels  = [labels;[ones(nb_data_class,1) .* k]];
-%     
-% end
+for k=1:K    
+    X       = [X;  gmm_sample(nb_data_per_class(k),1,Mu(:,k),Sigma(:,:,k))'   ];
+    labels  = [labels;[ones(nb_data_per_class(k),1) .* k]];    
+end
     
-[X,labels]  = ml_gmm_sample(nb_data_class,Priors,Mu,Sigma);
-X           = X'; 
-labels      = labels(:);
+% [X,labels]  = gmm_sample(nb_data_class,Priors,Mu,Sigma);
+% X           = X'; 
+% labels      = labels(:);
 
 gmm.Priors  = Priors;
 gmm.Mu      = Mu;

@@ -2,9 +2,15 @@
 % put your example here denys (isolonines + nonlinear decision boundaries,
 % BIC, AIC, etc
 clear all; close all;
-%%
+
+%%%%%%%%%%%%%%%% How to set num_samples %%%%%%%%%%%%%%%%
+% If num_samples = 100 is a scalar that will be taken as the total number of
+% samples and each class will have an equal number of samples
+% If num_samples = [100 200] is a vector, each value will be the number of
+% samples per class, the total number of samples = sum(num_samples), note
+% that the vector must have the same length as the num_classes variable
 num_samples     = 100;
-num_classes     = 2;
+num_classes     = 3;
 dim             = 2;
 [X,labels,gmm]  = ml_clusters_data(num_samples,dim,num_classes);
 
@@ -19,8 +25,8 @@ axis equal
 
 cluster_options.method_name = 'kernel-kmeans';
 cluster_options.K           = 2;
-cluster_options.kernel      = 'gauss';
-cluster_options.kpar        = 1;
+cluster_options.kernel      = 'poly';
+cluster_options.kpar        = [0 2];
 
 [result1]                   = ml_clustering(X,cluster_options);
 
