@@ -174,7 +174,7 @@ hold off;
 box on; grid on;
 %% Set title 
 
-if plot_figure==false, 
+if plot_figure==false 
     title({title_name}, 'Interpreter','Latex','FontName','Times', 'FontWeight','Light'); 
 end
 

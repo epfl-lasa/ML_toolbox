@@ -1,4 +1,4 @@
-function [X,labels,gmm] = ml_clusters_data(num_samples,dim,num_classes)
+function [X,labels,gmm] = ml_clusters_data(num_samples,dim,num_classes, varargin)
 %ML_CLUSTERS_DATA Generates a set of Clusters, where one cluster is one
 % class. The data is samples from a Gaussian Mixture Model
 %
@@ -44,14 +44,12 @@ else
     nb_data_per_class    = num_samples;
 end
 
-nb_data_per_class
 % sampling volume range
 a =  - num_classes * min_dist_clusters;
 b =    num_classes * min_dist_clusters;
 
 % position of first mean
 Mu(:,1)      = rand_r(a,b,1,dim)';
-
 if     strcmp(cov_type,'iso') == true
    for k=1:K
         Sigma(:,:,k) = eye(dim) .* rand_r(min_cov_std,max_cov_std,1,1); 
@@ -88,11 +86,15 @@ for k=2:K
     
 end
 
-
 X      = [];
 labels = [];
 
 for k=1:K    
+    if nargin == 4
+        offset_origin = varargin{1};
+        size(offset_origin)
+        Mu(:,k) = Mu(:,k) + offset_origin;        
+    end    
     X       = [X;  gmm_sample(nb_data_per_class(k),1,Mu(:,k),Sigma(:,:,k))'   ];
     labels  = [labels;[ones(nb_data_per_class(k),1) .* k]];    
 end
