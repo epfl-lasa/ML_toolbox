@@ -8,7 +8,7 @@ hold on; scatter(0,0,150,'k+', 'LineWidth',5)
 axlim = axis;
 
 %% 1b) Shift the dataset
-origin_offset    = [0 0]'; % Set the origin of the sampled data
+origin_offset    = [-50 0]'; % Set the origin of the sampled data
 X = bsxfun(@plus,X', origin_offset)';
 
 % Plotting function
