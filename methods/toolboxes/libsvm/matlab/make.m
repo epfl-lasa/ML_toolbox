@@ -5,7 +5,7 @@ try
 	if (exist ('OCTAVE_VERSION', 'builtin'))
 		mex libsvmread.c
 		mex libsvmwrite.c
-		mex -I.. svmtrain.c ../svm.cpp svm_model_matlab.c
+		mex -I.. libsvmtrain.c ../svm.cpp svm_model_matlab.c
 		mex -I.. svmpredict.c ../svm.cpp svm_model_matlab.c
 	% This part is for MATLAB
 	% Add -largeArrayDims on 64-bit machines of MATLAB
@@ -14,11 +14,11 @@ try
 		mex CFLAGS="\$CFLAGS -std=c99" -largeArrayDims libsvmwrite.c
         
         % Activate this if we want OMP implementation
-% 		mex CFLAGS="\$CFLAGS -std=c99" CXXFLAGS="\$CXXFLAGS -fopenmp" -largeArrayDims -I.. -lgomp svmtrain.c ../svm.cpp svm_model_matlab.c
+% 		mex CFLAGS="\$CFLAGS -std=c99" CXXFLAGS="\$CXXFLAGS -fopenmp" -largeArrayDims -I.. -lgomp libsvmtrain.c ../svm.cpp svm_model_matlab.c
 % 		mex CFLAGS="\$CFLAGS -std=c99" CXXFLAGS="\$CXXFLAGS -fopenmp" -largeArrayDims -I.. -lgomp svmpredict.c ../svm.cpp svm_model_matlab.c
         
         % Normal CFlage without OMP
-        mex CFLAGS="\$CFLAGS -std=c99"  -largeArrayDims -I.. svmtrain.c ../svm.cpp svm_model_matlab.c
+        mex CFLAGS="\$CFLAGS -std=c99"  -largeArrayDims -I.. libsvmtrain.c ../svm.cpp svm_model_matlab.c
 		mex CFLAGS="\$CFLAGS -std=c99"  -largeArrayDims -I.. svmpredict.c ../svm.cpp svm_model_matlab.c
         
 	end

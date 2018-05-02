@@ -15,7 +15,7 @@ classdef SVM < handle
     
     function train(a, inputs, outputs)
       
-      a.svm = svmtrain(outputs, inputs);
+      a.svm = libsvmtrain(outputs, inputs);
       
     end
     

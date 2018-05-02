@@ -22,7 +22,7 @@ void print_string_matlab(const char *s) {mexPrintf(s);}
 void exit_with_help()
 {
 	mexPrintf(
-	"Usage: model = svmtrain(training_label_vector, training_instance_matrix, 'libsvm_options');\n"
+	"Usage: model = libsvmtrain(training_label_vector, training_instance_matrix, 'libsvm_options');\n"
 	"libsvm_options:\n"
 	"-s svm_type : set type of SVM (default 0)\n"
 	"	0 -- C-SVC		(multi-class classification)\n"

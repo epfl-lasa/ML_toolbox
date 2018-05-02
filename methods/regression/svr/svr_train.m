@@ -74,7 +74,7 @@ options = options{1};
 
 
 %% Train SVM Model
-model = svmtrain(y, X, options);
+model = libsvmtrain(y, X, options);
 
 %% The LIBSVM Model struct will contain the following parameters
 % -Parameters: parameters

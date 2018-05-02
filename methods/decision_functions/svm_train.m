@@ -83,7 +83,7 @@ end
 options = options{1};
 
 %% Train SVM Model
-model = svmtrain(labels, sparse(data), options);
+model = libsvmtrain(labels, sparse(data), options);
 
 %% The LIBSVM Model struct will contain the following parameters
 % -Parameters: parameters

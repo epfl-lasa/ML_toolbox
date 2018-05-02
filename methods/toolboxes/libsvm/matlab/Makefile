@@ -26,8 +26,8 @@ binary: svmpredict.$(MEX_EXT) svmtrain.$(MEX_EXT) libsvmread.$(MEX_EXT) libsvmwr
 svmpredict.$(MEX_EXT):     svmpredict.c ../svm.h ../svm.o svm_model_matlab.o
 	$(MEX) $(MEX_OPTION) svmpredict.c ../svm.o svm_model_matlab.o
 
-svmtrain.$(MEX_EXT):       svmtrain.c ../svm.h ../svm.o svm_model_matlab.o
-	$(MEX) $(MEX_OPTION) svmtrain.c ../svm.o svm_model_matlab.o
+svmtrain.$(MEX_EXT):       libsvmtrain.c ../svm.h ../svm.o svm_model_matlab.o
+	$(MEX) $(MEX_OPTION) libsvmtrain.c ../svm.o svm_model_matlab.o
 
 libsvmread.$(MEX_EXT):	libsvmread.c
 	$(MEX) $(MEX_OPTION) libsvmread.c
